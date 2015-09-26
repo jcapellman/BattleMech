@@ -8,20 +8,20 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BattleMech.UWP {
     public class MainGame : Game {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        GraphicsDeviceManager _graphics;
+        SpriteBatch _spriteBatch;
 
         private TexturableManager _tm;
         
-        KeyboardState currentKeyboardState;
+        KeyboardState _currentKeyboardState;
 
         public MainGame() {
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
         
         protected override void LoadContent() {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _tm = new TexturableManager(Content);
             
@@ -34,20 +34,35 @@ namespace BattleMech.UWP {
         }
         
         protected override void Update(GameTime gameTime) {
-            currentKeyboardState = Keyboard.GetState();
+            _currentKeyboardState = Keyboard.GetState();
 
+            var keys = _currentKeyboardState.GetPressedKeys();
+
+            if (keys.Length == 0) {
+                base.Update(gameTime);
+
+                return;
+            }
+            
             var player = _tm.GetItemByEnum(TEXTURABLE_ITEM_TYPES.PLAYER);
 
-            if (currentKeyboardState.IsKeyDown(Keys.W)) {
-                player.OriginY += 7.0f;
-            } else if (currentKeyboardState.IsKeyDown(Keys.S)) {
-                player.OriginY -= 7.0f;
-            } else if (currentKeyboardState.IsKeyDown(Keys.A)) {
-                player.OriginX += 7.0f;
-            } else if (currentKeyboardState.IsKeyDown(Keys.D)) {
-                player.OriginX -= 7.0f;
+            foreach (var key in keys) {
+                switch (key) {
+                    case Keys.A:
+                        player.OriginX += 7.0f;
+                        break;
+                    case Keys.D:
+                        player.OriginX -= 7.0f;
+                        break;
+                    case Keys.W:
+                        player.OriginY += 7.0f;
+                        break;
+                    case Keys.S:
+                        player.OriginY -= 7.0f;
+                        break;
+                }
             }
-
+           
             _tm.UpdateItem(player);
 
             base.Update(gameTime);
@@ -56,15 +71,15 @@ namespace BattleMech.UWP {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
+            _spriteBatch.Begin();
 
             foreach (var texturable in _tm.Items) {
-                spriteBatch.Draw(texturable.Texture, texturable.Position, origin: texturable.Origin);
+                _spriteBatch.Draw(texturable.Texture, texturable.Position, origin: texturable.Origin);
 
                 texturable.Update();
             }
 
-            spriteBatch.End();
+            _spriteBatch.End();
 
             base.Draw(gameTime);
         }
