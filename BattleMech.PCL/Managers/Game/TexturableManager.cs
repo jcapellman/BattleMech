@@ -3,6 +3,7 @@ using System.Linq;
 
 using BattleMech.PCL.Enums;
 using BattleMech.PCL.Objects.Game.Base;
+
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
