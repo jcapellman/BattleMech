@@ -27,6 +27,7 @@ namespace BattleMech.UWP {
             
             _tm.AddTextureItem<Background>("background.jpg");
             _tm.AddTextureItem<Player>("mech.png");
+            _tm.AddTextureItem<Enemy>("enemy.png");
         }
 
         protected override void UnloadContent() {

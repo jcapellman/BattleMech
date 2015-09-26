@@ -1,0 +1,15 @@
+﻿using BattleMech.PCL.Enums;
+using BattleMech.PCL.Objects.Game.Base;
+
+using Microsoft.Xna.Framework.Graphics;
+
+namespace BattleMech.PCL.Objects.Game {
+    public class Enemy : BaseTexturable {
+        public Enemy(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.ENEMY) {
+            AccelerationX += 4.0f;
+
+            PositionX = 1200.0f;
+            PositionY = 400.0f;
+        }
+    }
+}
