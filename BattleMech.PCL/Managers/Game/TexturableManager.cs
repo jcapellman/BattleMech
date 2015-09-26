@@ -1,32 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 using BattleMech.PCL.Enums;
 using BattleMech.PCL.Objects.Game.Base;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace BattleMech.PCL.Managers.Game {
-    public class TexturableManager : BaseGameManager {
-        private Dictionary<Guid, BaseTexturable> _items { get; }
+    public class TexturableManager : BaseGameManager<BaseTexturable> {
+        public TexturableManager(ContentManager content) : base(content) { }
 
-        public List<BaseTexturable> Items => new List<BaseTexturable>(_items.Values);
-
-        public TexturableManager() {
-            _items = new Dictionary<Guid, BaseTexturable>();
-        }
-
-        public void AddItem(BaseTexturable item) {
-            item.ID = Guid.NewGuid();
-
-            _items.Add(item.ID, item);
+        public void AddTextureItem<T>(string textureName) where T : BaseTexturable {
+            AddItem((T)Activator.CreateInstance(typeof(T), _content.Load<Texture2D>(textureName)));
         }
 
         public BaseTexturable GetItemByEnum(TEXTURABLE_ITEM_TYPES itemType) {
             return _items.Values.FirstOrDefault(a => a.ItemType == itemType);
-        }
-
-        public void UpdateItem(BaseTexturable item) {
-            _items[item.ID] = item;
         }
     }
 }
