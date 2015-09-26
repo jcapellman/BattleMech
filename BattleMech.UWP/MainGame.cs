@@ -20,17 +20,13 @@ namespace BattleMech.UWP {
             Content.RootDirectory = "Content";
         }
         
-        private Texture2D getTexture2D(string image) {
-            return Content.Load<Texture2D>(image);
-        }
-
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tm = new TexturableManager();
-
-            _tm.AddItem(new Background(getTexture2D("background.jpg")));
-            _tm.AddItem(new Player(getTexture2D("mech.png")));
+            _tm = new TexturableManager(Content);
+            
+            _tm.AddTextureItem<Background>("background.jpg");
+            _tm.AddTextureItem<Player>("mech.png");
         }
 
         protected override void UnloadContent() {
