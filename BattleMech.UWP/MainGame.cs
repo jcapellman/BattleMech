@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace BattleMech {
+namespace BattleMech.UWP {
     public class MainGame : Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -19,11 +19,7 @@ namespace BattleMech {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
-
-        protected override void Initialize() {
-            base.Initialize();
-        }
-
+        
         private Texture2D getTexture2D(string image) {
             return Content.Load<Texture2D>(image);
         }

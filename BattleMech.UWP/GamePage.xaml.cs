@@ -1,8 +1,7 @@
 ﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
-namespace BattleMech {
-    public sealed partial class GamePage : Page {
+namespace BattleMech.UWP {
+    public sealed partial class GamePage {
         readonly MainGame _game;
 
         public GamePage() {
