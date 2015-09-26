@@ -40,6 +40,7 @@
     <Compile Include="Objects\Game\Background.cs" />
     <Compile Include="Objects\Game\Base\BaseRenderable.cs" />
     <Compile Include="Objects\Game\Base\BaseTexturable.cs" />
+    <Compile Include="Objects\Game\Enemy.cs" />
     <Compile Include="Objects\Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
