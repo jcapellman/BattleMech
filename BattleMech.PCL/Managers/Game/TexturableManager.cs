@@ -7,26 +7,26 @@ using BattleMech.PCL.Objects.Game.Base;
 
 namespace BattleMech.PCL.Managers.Game {
     public class TexturableManager : BaseGameManager {
-        public List<BaseTexturable> Items { get; }
+        private Dictionary<Guid, BaseTexturable> _items { get; }
+
+        public List<BaseTexturable> Items => new List<BaseTexturable>(_items.Values);
 
         public TexturableManager() {
-            Items = new List<BaseTexturable>();
+            _items = new Dictionary<Guid, BaseTexturable>();
         }
 
         public void AddItem(BaseTexturable item) {
             item.ID = Guid.NewGuid();
 
-            Items.Add(item);
+            _items.Add(item.ID, item);
         }
 
         public BaseTexturable GetItemByEnum(TEXTURABLE_ITEM_TYPES itemType) {
-            return Items.FirstOrDefault(a => a.ItemType == itemType);
+            return _items.Values.FirstOrDefault(a => a.ItemType == itemType);
         }
 
         public void UpdateItem(BaseTexturable item) {
-            var index = Items.FindIndex(a => a.ID == item.ID);
-
-            Items[index] = item;
+            _items[item.ID] = item;
         }
     }
 }
