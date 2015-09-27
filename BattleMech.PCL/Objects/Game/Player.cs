@@ -8,6 +8,11 @@ namespace BattleMech.PCL.Objects.Game {
         public Player(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.PLAYER) {
             PositionX = 200.0f;
             PositionY = 200.0f;
+
+            AccelerationX = 0.0f;
+            AccelerationY = 0.0f;
+
+            BoundWithinScreen = true;
         }
     }
 }

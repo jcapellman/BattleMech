@@ -17,15 +17,16 @@ namespace BattleMech.UWP {
 
         public MainGame() {
             _graphics = new GraphicsDeviceManager(this);
+            
             Content.RootDirectory = "Content";
         }
         
         protected override void LoadContent() {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tm = new TexturableManager(Content);
+            _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
             
-            _tm.AddTextureItem<Background>("background.jpg");
+            _tm.AddTextureItem<Background>("Blue_Stars.jpg");
             _tm.AddTextureItem<Player>("mech.png");
             _tm.AddTextureItem<Enemy>("enemy.png");
         }
@@ -50,16 +51,16 @@ namespace BattleMech.UWP {
             foreach (var key in keys) {
                 switch (key) {
                     case Keys.A:
-                        player.OriginX += 7.0f;
+                        player.PositionX -= 7.0f;
                         break;
                     case Keys.D:
-                        player.OriginX -= 7.0f;
+                        player.PositionX += 7.0f;
                         break;
                     case Keys.W:
-                        player.OriginY += 7.0f;
+                        player.PositionY -= 7.0f;
                         break;
                     case Keys.S:
-                        player.OriginY -= 7.0f;
+                        player.PositionY += 7.0f;
                         break;
                 }
             }
@@ -75,7 +76,7 @@ namespace BattleMech.UWP {
             _spriteBatch.Begin();
 
             foreach (var texturable in _tm.Items) {
-                _spriteBatch.Draw(texturable.Texture, texturable.Position, origin: texturable.Origin);
+                _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
 
                 texturable.Update();
             }

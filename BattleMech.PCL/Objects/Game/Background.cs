@@ -5,7 +5,9 @@ using Microsoft.Xna.Framework.Graphics;
 namespace BattleMech.PCL.Objects.Game {
     public class Background : BaseTexturable {
         public Background(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.BACKGROUND) {
-            AccelerationX += 0.25f;
+            AccelerationX -= 0.25f;
+
+            IsFullScreen = true;
         }
     }
 }

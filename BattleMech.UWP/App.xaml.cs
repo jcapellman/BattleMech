@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -35,12 +36,7 @@ namespace BattleMech.UWP {
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e) {
-
-#if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached) {
-                this.DebugSettings.EnableFrameRateCounter = true;
-            }
-#endif
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
 
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -59,7 +55,7 @@ namespace BattleMech.UWP {
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
-
+            
             if (rootFrame.Content == null) {
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
