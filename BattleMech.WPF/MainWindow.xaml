@@ -1,0 +1,24 @@
+﻿<Controls:MetroWindow  x:Class="BattleMech.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:BattleMech.WPF"
+        mc:Ignorable="d"
+        Title="BattleMechED" Height="720" Width="1280">
+    <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#2e2e2e">
+        <Menu IsMainMenu="True">
+            <MenuItem Header="File">
+                <MenuItem Header="New..." />
+                <Separator />
+                <MenuItem Header="Open..." />
+                <Separator />
+                <MenuItem Header="Save" />
+                <Separator />
+                <MenuItem Header="Exit" x:Name="miExit" Click="miExit_Click" />
+            </MenuItem>
+            <MenuItem Header="About" />
+        </Menu>
+    </Grid>
+</Controls:MetroWindow>
