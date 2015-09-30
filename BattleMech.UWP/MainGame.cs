@@ -1,7 +1,8 @@
 ﻿using BattleMech.PCL.Enums;
 using BattleMech.PCL.Managers.Game;
 using BattleMech.PCL.Objects.Game;
-
+using BattleMech.PCL.Objects.Game.Actors;
+using BattleMech.PCL.Objects.Game.Base;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -61,6 +62,11 @@ namespace BattleMech.UWP {
                         break;
                     case Keys.S:
                         player.PositionY += 7.0f;
+                        break;
+                    case Keys.Space:
+                        BaseTexturable bullet = _tm.AddTextureItem<GenericBullet>("viper_blaster.png");
+                        bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
+                        bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
                         break;
                 }
             }

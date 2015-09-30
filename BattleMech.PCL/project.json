@@ -1,4 +1,4 @@
-{
+﻿{
   "supports": {},
   "dependencies": {
     "MonoGame.Framework.WindowsUAP": "3.4.0.459"

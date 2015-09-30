@@ -37,6 +37,7 @@
     <Compile Include="Enums\TEXTURABLE_ITEM_TYPES.cs" />
     <Compile Include="Managers\Game\BaseGameManager.cs" />
     <Compile Include="Managers\Game\TexturableManager.cs" />
+    <Compile Include="Objects\Game\Actors\GenericBullet.cs" />
     <Compile Include="Objects\Game\Background.cs" />
     <Compile Include="Objects\Game\Base\BaseRenderable.cs" />
     <Compile Include="Objects\Game\Base\BaseTexturable.cs" />

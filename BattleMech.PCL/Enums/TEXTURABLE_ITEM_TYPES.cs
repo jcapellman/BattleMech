@@ -2,6 +2,7 @@
     public enum TEXTURABLE_ITEM_TYPES {
         PLAYER,
         BACKGROUND,
-        ENEMY
+        ENEMY,
+        ACTOR
     }
 }

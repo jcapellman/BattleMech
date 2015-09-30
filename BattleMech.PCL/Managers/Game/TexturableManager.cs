@@ -19,7 +19,7 @@ namespace BattleMech.PCL.Managers.Game {
             _windowHeight = windowHeight;
         }
 
-        public void AddTextureItem<T>(string textureName) where T : BaseTexturable {
+        public BaseTexturable AddTextureItem<T>(string textureName) where T : BaseTexturable {
             var item = (T) Activator.CreateInstance(typeof (T), _content.Load<Texture2D>(textureName));
 
             if (item.IsFullScreen) {
@@ -28,6 +28,7 @@ namespace BattleMech.PCL.Managers.Game {
             }
 
             AddItem(item);
+            return item;
         }
 
         public BaseTexturable GetItemByEnum(TEXTURABLE_ITEM_TYPES itemType) {
