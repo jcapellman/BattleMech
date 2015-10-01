@@ -13,7 +13,7 @@ namespace BattleMech.PCL.Objects.Game.Actors
     {
         public GenericBullet(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.ACTOR)
         {
-            AccelerationX = 10.0f;
+            MoveX = 10.0f;
             PositionX = 400.0f;
             PositionY = 400.0f;
         }

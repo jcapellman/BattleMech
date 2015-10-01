@@ -11,9 +11,9 @@ namespace BattleMech.PCL.Objects.Game.Base {
 
         public float OriginY;
 
-        public float AccelerationX;
+        public float MoveX;
 
-        public float AccelerationY;
+        public float MoveY;
 
         public Guid ID;
 
@@ -29,9 +29,9 @@ namespace BattleMech.PCL.Objects.Game.Base {
             BoundWithinScreen = false;
         }
 
-        public void Update() {
-            PositionX += AccelerationX;
-            PositionY += AccelerationY;
+        public virtual void Update(GameTime gameTime) {
+            PositionX += MoveX;
+            PositionY += MoveY;
         }
 
         public Vector2 Origin => new Vector2(OriginX, OriginY);

@@ -26,7 +26,8 @@ namespace BattleMech.UWP {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
-            
+            _tm.controller = new PCInputController();
+
             _tm.AddTextureItem<Background>("Blue_Stars.jpg");
             _tm.AddTextureItem<Player>("mech.png");
             _tm.AddTextureItem<Enemy>("enemy.png");
@@ -37,41 +38,7 @@ namespace BattleMech.UWP {
         }
         
         protected override void Update(GameTime gameTime) {
-            _currentKeyboardState = Keyboard.GetState();
-
-            var keys = _currentKeyboardState.GetPressedKeys();
-
-            if (keys.Length == 0) {
-                base.Update(gameTime);
-
-                return;
-            }
-            
-            var player = _tm.GetItemByEnum(TEXTURABLE_ITEM_TYPES.PLAYER);
-
-            foreach (var key in keys) {
-                switch (key) {
-                    case Keys.A:
-                        player.PositionX -= 7.0f;
-                        break;
-                    case Keys.D:
-                        player.PositionX += 7.0f;
-                        break;
-                    case Keys.W:
-                        player.PositionY -= 7.0f;
-                        break;
-                    case Keys.S:
-                        player.PositionY += 7.0f;
-                        break;
-                    case Keys.Space:
-                        BaseTexturable bullet = _tm.AddTextureItem<GenericBullet>("viper_blaster.png");
-                        bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
-                        bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
-                        break;
-                }
-            }
-           
-            _tm.UpdateItem(player);
+            _tm.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -83,8 +50,6 @@ namespace BattleMech.UWP {
 
             foreach (var texturable in _tm.Items) {
                 _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
-
-                texturable.Update();
             }
 
             _spriteBatch.End();
