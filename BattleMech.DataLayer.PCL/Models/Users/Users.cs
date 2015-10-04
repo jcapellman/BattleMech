@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BattleMech.DataLayer.PCL.Models.Users {
+﻿namespace BattleMech.DataLayer.PCL.Models.Users {
     public class Users : BaseModel {
         public string FirstName { get; set; }
 
@@ -8,7 +6,7 @@ namespace BattleMech.DataLayer.PCL.Models.Users {
 
         public string EmailAddress { get; set; }
 
-        public Guid Password { get; set; }
+        public string Password { get; set; }
 
         public bool Activated { get; set; }
     }
