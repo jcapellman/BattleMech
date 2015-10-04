@@ -1,9 +1,11 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 using BattleMech.DataLayer.PCL.Models;
 using BattleMech.WebAPI.PCL.Transports.Common;
+using BattleMech.WebAPI.PCL.Transports.Internal;
 
 using Newtonsoft.Json;
 
@@ -13,12 +15,27 @@ namespace BattleMech.WebAPI.PCL.Handlers {
 
         internal string _baseArgURL { get; set; }
 
-        public BaseHandler(string baseURL, string baseArgURL) {
-            _baseURL = baseURL;
+        internal string _token { get; set; }
+
+        public BaseHandler(HandlerItem handlerItem, string baseArgURL) {
+            _baseURL = handlerItem.WEBAPIUrl;
             _baseArgURL = baseArgURL;
+            _token = handlerItem.Token;
         }
 
-        private static HttpClient HC => new HttpClient();
+        private HttpClient HC {
+            get {
+                var handler = new HttpClientHandler();
+
+                var client = new HttpClient(handler) { Timeout = TimeSpan.FromMinutes(1) };
+
+                if (!string.IsNullOrEmpty(_token)) {
+                    client.DefaultRequestHeaders.Add("AUTH_TOKEN", _token);
+                }
+
+                return client;
+            }
+        }
 
         private string BASEURL => _baseURL + _baseArgURL;
 
@@ -34,6 +51,26 @@ namespace BattleMech.WebAPI.PCL.Handlers {
             var data = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             return JsonConvert.DeserializeObject<CTI<TK>>(data);
+        }
+
+        public async Task<TK> POST<T, TK>(string urlArgs, T obj) {
+            var result = await HC.PostAsync(BASEURL, convertObj(obj));
+
+            var data = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            return JsonConvert.DeserializeObject<TK>(data);
+        }
+
+        public async Task<K> GET<T, K>(string urlArguments, T obj) {
+            var str = await HC.GetStringAsync($"{BASEURL}{convertObj(obj)}");
+
+            return JsonConvert.DeserializeObject<K>(str);
+        }
+
+        public async Task<T> Get<T>(string urlArguments) {
+            var str = await HC.GetStringAsync($"{BASEURL}{urlArguments}");
+
+            return JsonConvert.DeserializeObject<T>(str);
         }
     }
 }
