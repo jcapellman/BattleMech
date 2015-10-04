@@ -57,12 +57,13 @@ namespace BattleMech.UWP {
             }
             
             if (rootFrame.Content == null) {
-                // When the navigation stack isn't restored navigate to the first page,
-                // configuring the new page by passing required information as a navigation
-                // parameter
+#if GAME_ONLY
                 rootFrame.Navigate(typeof(GamePage), e.Arguments);
+#else
+                rootFrame.Navigate(typeof(MainMenuPage), e.Arguments);
+#endif
             }
-            // Ensure the current window is active
+
             Window.Current.Activate();
         }
 
