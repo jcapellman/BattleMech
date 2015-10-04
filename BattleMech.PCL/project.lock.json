@@ -18,13 +18,13 @@
       "sha512": "zjc9aJbVDeFVIqoxqmjVWfetVjJfDI7k1TSv2bm7oTJtAVoDd6MHF+yEz5/KNIgv2KJ2BZEw71Tpr7E1T75aYQ==",
       "type": "Package",
       "files": [
-        "[Content_Types].xml",
         "_rels/.rels",
-        "lib/netcore/MonoGame.Framework.dll",
-        "lib/netcore/MonoGame.Framework.pri",
-        "lib/netcore/MonoGame.Framework.xml",
-        "lib/netcore/MonoGame.Framework.xr.xml",
+        "MonoGame.Framework.WindowsUAP.nuspec",
         "lib/netcore/MonoGame.Framework/Themes/generic.xbf",
+        "lib/netcore/MonoGame.Framework.dll",
+        "lib/netcore/MonoGame.Framework.xml",
+        "lib/netcore/MonoGame.Framework.pri",
+        "lib/netcore/MonoGame.Framework.xr.xml",
         "lib/netcore/SharpDX.Direct2D1.dll",
         "lib/netcore/SharpDX.Direct3D11.dll",
         "lib/netcore/SharpDX.dll",
@@ -32,9 +32,9 @@
         "lib/netcore/SharpDX.MediaFoundation.dll",
         "lib/netcore/SharpDX.XAudio2.dll",
         "lib/netcore/SharpDX.XInput.dll",
-        "MonoGame.Framework.WindowsUAP.nuspec",
+        "readme.txt",
         "package/services/metadata/core-properties/4927b4b972ff4a04a52e22bd23f42442.psmdcp",
-        "readme.txt"
+        "[Content_Types].xml"
       ]
     }
   },

@@ -11,6 +11,51 @@
         <Grid.Background>
             <ImageBrush ImageSource="Content/background.jpg" />
         </Grid.Background>
-        
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Hand Menu -->
+        <Grid Grid.Column="0" Margin="0,50,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Image Grid.Row="0" Margin="20,0,20,20" Source="Assets/Logo.png" />
+            <Image Grid.Row="1" Margin="20,0,20,20" Stretch="UniformToFill" Source="Assets/MechMainMenu.png" />
+        </Grid>
+
+        <!-- Right Hand Menu -->
+        <Grid Grid.Column="1" HorizontalAlignment="Stretch" MinWidth="425">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.75" />
+            </Grid.Background>
+
+            <Grid Margin="10,50,10,50">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <Button x:Name="btnNewGame" Style="{StaticResource MainMenu}" Click="btnNewGame_OnClick" Content="NEW GAME" Grid.Row="0" />
+            
+                <Button x:Name="btnCustomGame" Style="{StaticResource MainMenu}" Content="CUSTOM GAME" Grid.Row="1" />
+            
+                <Button x:Name="btnCharacterProfile" Style="{StaticResource MainMenu}" Content="CHARACTER PROFILE" Grid.Row="2" />
+            
+                <Button x:Name="btnLeaderboard" Style="{StaticResource MainMenu}" Content="LEADERBOARD" Grid.Row="3" />
+            
+                <Button x:Name="btnOptions" Style="{StaticResource MainMenu}" Content="OPTIONS" Grid.Row="4" />
+            
+                <Button x:Name="btnCredits" Style="{StaticResource MainMenu}" Content="CREDITS" Grid.Row="5" />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

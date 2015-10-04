@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 using BattleMech.PCL.ViewModels;
 
@@ -9,5 +10,7 @@ namespace BattleMech.UWP {
 
             DataContext = new MainMenuModel();
         }
+
+        private void btnNewGame_OnClick(object sender, RoutedEventArgs e) { Frame.Navigate(typeof (MainGame)); }
     }
 }

@@ -92,6 +92,9 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Fonts\Font.TTF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +144,8 @@
     <None Include="BattleMech.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\MechMainMenu.png" />
     <Content Include="Content\background.jpg" />
     <Content Include="Content\Blue_Stars.jpg" />
     <Content Include="Content\enemy.png" />
@@ -169,6 +174,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainMenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\AppStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
