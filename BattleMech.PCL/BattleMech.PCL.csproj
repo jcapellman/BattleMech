@@ -60,6 +60,7 @@
     <Compile Include="Objects\Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CharacterProfileModel.cs" />
     <Compile Include="ViewModels\MainMenuModel.cs" />
   </ItemGroup>
   <ItemGroup>

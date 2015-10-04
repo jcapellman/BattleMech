@@ -46,15 +46,15 @@
                 
                 <Button x:Name="btnNewGame" Style="{StaticResource MainMenu}" Click="btnNewGame_OnClick" Content="NEW GAME" Grid.Row="0" />
             
-                <Button x:Name="btnCustomGame" Style="{StaticResource MainMenu}" Content="CUSTOM GAME" Grid.Row="1" />
+                <Button x:Name="btnCustomGame" Style="{StaticResource MainMenu}" Click="btnCustomGame_OnCLick" Content="CUSTOM GAME" Grid.Row="1" />
             
-                <Button x:Name="btnCharacterProfile" Style="{StaticResource MainMenu}" Content="CHARACTER PROFILE" Grid.Row="2" />
+                <Button x:Name="btnCharacterProfile" Style="{StaticResource MainMenu}" Click="btnCharacterProfile_OnClick" Content="CHARACTER PROFILE" Grid.Row="2" />
             
-                <Button x:Name="btnLeaderboard" Style="{StaticResource MainMenu}" Content="LEADERBOARD" Grid.Row="3" />
+                <Button x:Name="btnLeaderboard" Style="{StaticResource MainMenu}" Click="btnLeaderboard_OnClick" Content="LEADERBOARD" Grid.Row="3" />
             
-                <Button x:Name="btnOptions" Style="{StaticResource MainMenu}" Content="OPTIONS" Grid.Row="4" />
+                <Button x:Name="btnOptions" Style="{StaticResource MainMenu}" Click="btnOptions_OnClick" Content="OPTIONS" Grid.Row="4" />
             
-                <Button x:Name="btnCredits" Style="{StaticResource MainMenu}" Content="CREDITS" Grid.Row="5" />
+                <Button x:Name="btnCredits" Style="{StaticResource MainMenu}" Click="btnCredits_OnClick" Content="CREDITS" Grid.Row="5" />
             </Grid>
         </Grid>
     </Grid>
