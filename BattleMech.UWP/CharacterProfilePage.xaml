@@ -24,20 +24,82 @@
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.5" />
             </Grid.Background>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Text="GAME HISTORY" Style="{StaticResource SubMenuHeader}" />
+
+            <ListView Grid.Row="1" SelectionMode="None" ItemsSource="{Binding GameHistory}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.Background>
+                                <SolidColorBrush Color="Black" Opacity="0.5" />
+                            </Grid.Background>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding GameDate}" FontSize="40" Foreground="Yellow" />
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding LevelName}" FontSize="30" Foreground="White" />
+                            
+                            <Grid Grid.Row="2" Margin="0,20,0,0" HorizontalAlignment="Stretch">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    
+                                    <RowDefinition Height="Auto" />                                    
+                                    <RowDefinition Height="Auto" />
+                                    
+                                    <RowDefinition Height="Auto" />                                    
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="Shots Fired" FontSize="20" Foreground="White" />
+                                <TextBlock Grid.Row="0" Grid.Column="1" Margin="20,0,0,0" Text="{Binding ShotsFired}" FontSize="20" Foreground="Yellow" />
+                                
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="Enemies Destroyed" FontSize="20" Foreground="White" />
+                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" Text="{Binding EnemiesDestroyed}" FontSize="20" Foreground="Yellow" />
+                                
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="Enemies Faught" FontSize="20" Foreground="White" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Margin="20,0,0,0" Text="{Binding TotalEnemiesFought}" FontSize="20" Foreground="Yellow" />
+                                
+                                <TextBlock Grid.Row="3" Grid.Column="0" Text="Experience Gained" FontSize="20" Foreground="White" />
+                                <TextBlock Grid.Row="3" Grid.Column="1" Margin="20,0,0,0" Text="{Binding ExperienceGarnered}" FontSize="20" Foreground="Yellow" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
         <Grid Grid.Row="2" Margin="20,0,20,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid Column="0" HorizontalAlignment="Left">
                 <Button Style="{StaticResource MainMenu}" Content="BACK TO MAIN MENU" x:Name="btnBack" Click="btnBack_OnClick" />
-            </Grid>
-
-            <Grid Column="1" HorizontalAlignment="Right">
-                <Button Style="{StaticResource MainMenu}" Content="SAVE" x:Name="btnSave" Click="btnSave_OnClick" />
             </Grid>
         </Grid>
     </Grid>

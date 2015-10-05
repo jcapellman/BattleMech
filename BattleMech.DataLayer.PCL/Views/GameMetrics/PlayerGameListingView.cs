@@ -1,8 +1,12 @@
-﻿namespace BattleMech.DataLayer.PCL.Views.GameMetrics {
+﻿using System;
+
+namespace BattleMech.DataLayer.PCL.Views.GameMetrics {
     public class PlayerGameListingView {
         public int ID { get; set; }
 
         public string LevelName { get; set; }
+
+        public DateTime GameDate { get; set; }
 
         public int EnemiesDestroyed { get; set; }
 

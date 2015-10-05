@@ -12,8 +12,8 @@ namespace BattleMech.WebAPI.Controllers {
             return await new GameMetricManager().AddMetric(gameMetric);
         }
 
-        public CTI<List<PlayerGameListingView>> GET(int UserID) {
-            return new GameMetricManager().GetMetrics(UserID);
+        public CTI<List<PlayerGameListingView>> GET() {
+            return new GameMetricManager().GetMetrics(1);
         }
     }
 }

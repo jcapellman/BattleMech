@@ -19,7 +19,7 @@ namespace BattleMech.WebAPI.Managers {
                 return null;
             }
 
-            return new AuthorizedUser();
+            return new AuthorizedUser {ID = 1};
         }
     }
 }

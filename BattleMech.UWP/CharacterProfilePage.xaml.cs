@@ -17,7 +17,5 @@ namespace BattleMech.UWP {
         protected override async void OnNavigatedTo(NavigationEventArgs e) { await viewModel.LoadData(); }
 
         private void btnBack_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
-
-        private void btnSave_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
     }
 }

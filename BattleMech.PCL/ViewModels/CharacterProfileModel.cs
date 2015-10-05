@@ -14,7 +14,7 @@ namespace BattleMech.PCL.ViewModels {
         } 
 
         public async Task<bool> LoadData() {
-            var login = await AttemptLogin("test", "test");
+            var login = await AttemptLogin("Test", "Test");
 
             var character = await new GameMetricHandler(Handler).GetGameMetrics();
 

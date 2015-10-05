@@ -13,13 +13,17 @@ namespace BattleMech.PCL.ViewModels {
         public HandlerItem Handler => new HandlerItem { Token = _token, WEBAPIUrl = "http://battlemech.azurewebsites.net/api/" };
 
         public async Task<bool> AttemptLogin(string username, string password) {
+            if (!string.IsNullOrEmpty(_token)) {
+                return true;
+            }
+
             var token = await new AuthHandler(Handler).GenerateToken(new AuthRequestItem { Username = username, Password = password });
 
             if (token != null) {
                 _token = token.Token;
             }
 
-            return string.IsNullOrEmpty(_token);
+            return !string.IsNullOrEmpty(_token);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
