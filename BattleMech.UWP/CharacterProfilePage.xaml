@@ -14,6 +14,7 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -21,6 +22,49 @@
         <TextBlock Grid.Row="0" Style="{StaticResource MenuHeader}" Text="CHARACTER PROFILE" />
 
         <Grid Grid.Row="1" Margin="20,20,20,20">
+            <Grid.Background>
+                <SolidColorBrush Color="Black" Opacity="0.5" />
+            </Grid.Background>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="20,0,0,0" Text="{Binding PlayerCharacter.Name}" FontSize="35" Foreground="Yellow" />
+            
+            <TextBlock Grid.Row="1" Grid.Column="0" Margin="20,0,0,0" Text="Level" FontSize="35" Foreground="White" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" Text="{Binding PlayerCharacter.LevelNumber}" FontSize="35" Foreground="Yellow" />
+            
+            <TextBlock Grid.Row="1" Grid.Column="2" Margin="20,0,0,0" Text="Total Experience" FontSize="35" Foreground="White" />
+            <TextBlock Grid.Row="1" Grid.Column="3" Margin="20,0,0,0" Text="{Binding PlayerCharacter.LevelNumber}" FontSize="35" Foreground="Yellow" />
+                       
+            <TextBlock Grid.Row="2" Grid.Column="0" Margin="20,0,0,0" Text="Total Deaths" FontSize="35" Foreground="White" />
+            <TextBlock Grid.Row="2" Grid.Column="1" Margin="20,0,0,0" Text="{Binding PlayerCharacter.TotalTimesDied}" FontSize="35" Foreground="Yellow" />
+            
+            <TextBlock Grid.Row="2" Grid.Column="2" Margin="20,0,0,0" Text="Total Shots Fired" FontSize="35" Foreground="White" />
+            <TextBlock Grid.Row="2" Grid.Column="3" Margin="20,0,0,0" Text="{Binding PlayerCharacter.TotalShotsFired}" FontSize="35" Foreground="Yellow" />
+            
+            <TextBlock Grid.Row="2" Grid.Column="4" Margin="20,0,0,0" Text="Total Enemies Destroyed" FontSize="35" Foreground="White" />
+            <TextBlock Grid.Row="2" Grid.Column="5" Margin="20,0,0,0" Text="{Binding PlayerCharacter.TotalEnemiesDestroyed}" FontSize="35" Foreground="Yellow" />
+            
+            <TextBlock Grid.Row="2" Grid.Column="6" Margin="20,0,0,0" Text="Total Enemies Faught" FontSize="35" Foreground="White" />
+            <TextBlock Grid.Row="2" Grid.Column="7" Margin="20,0,0,0" Text="{Binding PlayerCharacter.TotalEnemiesFought}" FontSize="35" Foreground="Yellow" />
+        </Grid>
+        
+        <Grid Grid.Row="2" Margin="20,20,20,20">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.5" />
             </Grid.Background>
@@ -93,7 +137,7 @@
             </ListView>
         </Grid>
 
-        <Grid Grid.Row="2" Margin="20,0,20,0">
+        <Grid Grid.Row="3" Margin="20,0,20,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>

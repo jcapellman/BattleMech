@@ -11,15 +11,24 @@ namespace BattleMech.PCL.ViewModels {
         public ObservableCollection<PlayerGameListingView> GameHistory {
             get { return _gameHistory; }
             set { _gameHistory = value; OnPropertyChanged(); }
-        } 
+        }
+
+        private PlayerCharacterView _playerCharacterView;
+
+        public PlayerCharacterView PlayerCharacter {
+            get {  return _playerCharacterView; }
+
+            set { _playerCharacterView = value; OnPropertyChanged(); }
+        }
 
         public async Task<bool> LoadData() {
             var login = await AttemptLogin("Test", "Test");
 
-            var character = await new GameMetricHandler(Handler).GetGameMetrics();
+            var character = await new CharacterProfileHandler(Handler).GET();
 
             if (!character.HasError) {
-                GameHistory = new ObservableCollection<PlayerGameListingView>(character.Value);
+                GameHistory = new ObservableCollection<PlayerGameListingView>(character.Value.GameHistory);
+                PlayerCharacter = character.Value.Character;
 
                 return true;
             }

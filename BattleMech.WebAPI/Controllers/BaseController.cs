@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
+﻿using System.Web.Http;
 
-namespace BattleMech.WebAPI.Controllers
-{
-    public class BaseController : ApiController
-    {
+using BattleMech.WebAPI.Transports.Internal;
+
+namespace BattleMech.WebAPI.Controllers {
+    public class BaseController : ApiController {
+        private AuthorizedUser _authorizedUser;
+
+        public AuthorizedUser AUTH_USER => _authorizedUser ?? (_authorizedUser = Request.Properties.ContainsKey("AUTH_USER") ? (AuthorizedUser)Request.Properties["AUTH_USER"] : null);
     }
 }
