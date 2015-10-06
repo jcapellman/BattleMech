@@ -24,6 +24,45 @@
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.5" />
             </Grid.Background>
+
+            <ListView ItemsSource="{Binding LevelListing}">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="20,0,20,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding LevelName}" FontSize="35" />
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="PUBLISHED ON" FontSize="25" Foreground="Yellow" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PublishDate}" Margin="10,0,0,0" FontSize="25" Foreground="White" />
+                            
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="CREATED BY" Margin="20,0,10,0" FontSize="25" Foreground="Yellow" />
+                            <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding AuthorName}" FontSize="25" Foreground="White" />
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="DESCRIPTION" Margin="0,20,0,10" FontSize="25" Foreground="Yellow"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Description}" FontSize="25" />                            
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
         <Grid Grid.Row="2" Margin="20,0,20,0">

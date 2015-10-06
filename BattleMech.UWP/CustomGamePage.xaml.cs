@@ -1,11 +1,19 @@
 ﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
+
+using BattleMech.PCL.ViewModels;
 
 namespace BattleMech.UWP {
-    public sealed partial class CustomGamePage : Page {
+    public sealed partial class CustomGamePage {
+        private LevelModel viewModel => (LevelModel) DataContext;
+
         public CustomGamePage() {
             this.InitializeComponent();
+
+            DataContext = new LevelModel();            
         }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e) { await viewModel.LoadData(); }
 
         private void btnBack_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
 
