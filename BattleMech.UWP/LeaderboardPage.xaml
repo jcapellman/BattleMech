@@ -24,6 +24,48 @@
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.5" />
             </Grid.Background>
+            
+            <ListView ItemsSource="{Binding LeaderboardListing}" SelectionMode="None">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="20,0,20,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />                                
+                                <RowDefinition Height="Auto" />       
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Row="0" Grid.RowSpan="4" MinWidth="64" Grid.Column="0" Margin="0,0,20,0" Background="Yellow">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Ranking}" Foreground="Black" FontSize="45" />    
+                            </Grid>
+                            
+                            <TextBlock Grid.Row="0" Grid.Column="1" Text="CHARACTER NAME" FontSize="25" Foreground="Yellow" />
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding PlayerName}" Margin="0,0,0,0" FontSize="45" Foreground="White" />
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="LEVEL NUMBER" Margin="0,0,10,0" FontSize="25" Foreground="Yellow"/>
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding LevelNumber}" FontSize="25" />                            
+                            
+                            <TextBlock Grid.Row="2" Grid.Column="3" Text="EXPERIENCE" Margin="20,0,10,0" FontSize="25" Foreground="Yellow"/>
+                            <TextBlock Grid.Row="2" Grid.Column="4" Text="{Binding Experience}" FontSize="25" />                            
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
 
         <Grid Grid.Row="2" Margin="20,0,20,0">

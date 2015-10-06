@@ -192,6 +192,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CharacterProfileController.cs" />
+    <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\LevelController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\CharacterProfileManager.cs" />
     <Compile Include="Managers\GameMetricManager.cs" />
+    <Compile Include="Managers\LeaderboardManager.cs" />
     <Compile Include="Managers\LevelManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

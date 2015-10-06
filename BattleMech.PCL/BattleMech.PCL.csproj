@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CharacterProfileModel.cs" />
+    <Compile Include="ViewModels\LeaderboardModel.cs" />
     <Compile Include="ViewModels\LevelModel.cs" />
     <Compile Include="ViewModels\MainMenuModel.cs" />
   </ItemGroup>
