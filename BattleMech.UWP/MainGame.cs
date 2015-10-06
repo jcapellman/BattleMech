@@ -1,8 +1,6 @@
-﻿using BattleMech.PCL.Enums;
-using BattleMech.PCL.Managers.Game;
+﻿using BattleMech.PCL.Managers.Game;
 using BattleMech.PCL.Objects.Game;
-using BattleMech.PCL.Objects.Game.Actors;
-using BattleMech.PCL.Objects.Game.Base;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;

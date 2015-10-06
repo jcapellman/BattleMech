@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 using BattleMech.PCL.ViewModels;
@@ -11,7 +14,11 @@ namespace BattleMech.UWP {
             DataContext = new MainMenuModel();
         }
 
-        private void btnNewGame_OnClick(object sender, RoutedEventArgs e) { Frame.Navigate(typeof (MainGame)); }
+        private void btnNewGame_OnClick(object sender, RoutedEventArgs e) {
+            App.Game = new GamePage();
+            
+            Window.Current.Content = App.Game;
+        }
 
         private void btnCustomGame_OnCLick(object sender, RoutedEventArgs e) { Frame.Navigate(typeof (CustomGamePage)); }
 
