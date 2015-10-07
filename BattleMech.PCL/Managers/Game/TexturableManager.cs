@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using BattleMech.PCL.Objects.Game;
 using Microsoft.Xna.Framework.Input;
 using BattleMech.PCL.Objects.Game.Actors;
+using System.Diagnostics;
 
 namespace BattleMech.PCL.Managers.Game {
     public class TexturableManager : BaseGameManager<BaseTexturable> {
@@ -75,6 +76,20 @@ namespace BattleMech.PCL.Managers.Game {
                         bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
                         bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
                         break;
+                }
+            }
+
+            var enemies = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.ENEMY);
+            var projectiles = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.PROJECTILE);
+
+            foreach (Enemy enemy in enemies)
+            {
+                foreach (GenericBullet projectile in projectiles)
+                {
+                    if(enemy.GetCollision(projectile.GetRectange() ))
+                    {
+                        projectile.IsActive = false;
+                    }
                 }
             }
 

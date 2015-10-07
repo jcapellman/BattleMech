@@ -22,6 +22,11 @@ namespace BattleMech.PCL.Managers.Game {
             _content = content;
         }
 
+        public virtual void DisposeItem(BaseRenderable item)
+        {
+            _items.Remove(item.ID);
+        }
+
         /// <summary>
         /// Handles actually update the items
         /// </summary>
@@ -30,7 +35,7 @@ namespace BattleMech.PCL.Managers.Game {
         {
             foreach (var item in Items)
             {
-                item.Update(gameTime);
+                if(item.IsActive) item.Update(gameTime);
             }
         }
 

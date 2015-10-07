@@ -19,6 +19,8 @@ namespace BattleMech.PCL.Objects.Game.Base {
 
         public bool BoundWithinScreen;
 
+        public bool IsActive;
+
         public BaseRenderable() {
             OriginX = 0.0f;
             OriginY = 0.0f;
@@ -27,6 +29,7 @@ namespace BattleMech.PCL.Objects.Game.Base {
             PositionY = 0.0f;
 
             BoundWithinScreen = false;
+            IsActive = true;
         }
 
         public virtual void Update(GameTime gameTime) {

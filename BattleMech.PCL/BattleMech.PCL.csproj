@@ -46,6 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Enums\TEXTURABLE_ITEM_TYPES.cs" />
+    <Compile Include="Interfaces\ICollidable.cs" />
     <Compile Include="Managers\Game\BaseGameManager.cs" />
     <Compile Include="Managers\Game\BaseInputController.cs" />
     <Compile Include="Managers\Game\PCInputController.cs" />
