@@ -47,7 +47,8 @@ namespace BattleMech.UWP {
             _spriteBatch.Begin();
 
             foreach (var texturable in _tm.Items) {
-                _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
+
+                if(texturable.IsActive) _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
             }
 
             _spriteBatch.End();

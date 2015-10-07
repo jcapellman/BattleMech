@@ -11,7 +11,7 @@ namespace BattleMech.PCL.Objects.Game.Actors
 {
     public class GenericBullet : BaseTexturable
     {
-        public GenericBullet(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.ACTOR)
+        public GenericBullet(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.PROJECTILE)
         {
             MoveX = 10.0f;
             PositionX = 400.0f;
