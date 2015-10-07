@@ -240,6 +240,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\battlemech %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\battlemech %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\battlemech.pubxml" />
   </ItemGroup>
   <PropertyGroup>

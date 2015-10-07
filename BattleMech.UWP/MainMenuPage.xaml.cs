@@ -1,12 +1,13 @@
 ﻿using System;
+
 using Windows.ApplicationModel.Core;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
-using Windows.UI.Xaml.Navigation;
 
 namespace BattleMech.UWP {
     public sealed partial class MainMenuPage : Page {
@@ -79,6 +80,40 @@ namespace BattleMech.UWP {
 
             viewModel.Username = string.Empty;
             viewModel.Password = string.Empty;
+        }
+
+        private void btnCancelCreateAccount_Click(object sender, RoutedEventArgs e) {
+            pCreateAccount.IsOpen = false;
+
+            viewModel.ClearCreateAccountForm();
+        }
+
+        private void btnCreateAccount_OnClick(object sender, RoutedEventArgs e) {
+            pCreateAccount.HorizontalOffset = (Window.Current.Bounds.Width - gCreateAccount.Width) / 2;
+            pCreateAccount.VerticalOffset = (Window.Current.Bounds.Height - gCreateAccount.Height) / 2;
+
+            pCreateAccount.IsOpen = true;
+        }
+
+        private async void btnCreate_Click(object sender, RoutedEventArgs e) {
+            var result = await viewModel.AttemptCreateAccount();
+
+            if (!result) {
+                ShowDialog("Email already in use");
+
+                return;
+            }
+
+            viewModel.Username = viewModel.caUsername;
+            viewModel.Password = viewModel.caPassword;
+
+            result = await viewModel.AttemptLogin();
+
+            App.Token = viewModel.Token;
+
+            pCreateAccount.IsOpen = false;
+
+            viewModel.ClearCreateAccountForm();
         }
     }
 }

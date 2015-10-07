@@ -43,14 +43,14 @@ namespace BattleMech.WebAPI.PCL.Handlers {
             return new StringContent(JsonConvert.SerializeObject(objValue), Encoding.UTF8, "application/json");
         }
 
-        public async Task<CTI<TK>> PUT<T, TK>(T obj) where T : BaseModel { return await PUT<T, TK>(_baseArgURL, obj); }
+        public async Task<TK> PUT<T, TK>(T obj) where T : BaseModel { return await PUT<T, TK>(_baseArgURL, obj); }
 
-        public async Task<CTI<TK>> PUT<T, TK>(string urlArgs, T obj) where T : BaseModel {
+        public async Task<TK> PUT<T, TK>(string urlArgs, T obj) where T : BaseModel {
             var result = await HC.PutAsync(BASEURL, convertObj(obj));
             
             var data = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
-            return JsonConvert.DeserializeObject<CTI<TK>>(data);
+            return JsonConvert.DeserializeObject<TK>(data);
         }
 
         public async Task<TK> POST<T, TK>(string urlArgs, T obj) {

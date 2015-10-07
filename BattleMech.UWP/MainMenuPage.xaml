@@ -43,6 +43,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <Button x:Name="btnNewGame" IsEnabled="{Binding IsLoggedIn, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnNewGame_OnClick" Content="NEW GAME" Grid.Row="0" />
@@ -58,6 +59,8 @@
                 <Button x:Name="btnCredits" Style="{StaticResource MainMenu}" Click="btnCredits_OnClick" Content="CREDITS" Grid.Row="5" />
 
                 <Button x:Name="btnLoginLogout" VerticalAlignment="Bottom" Style="{StaticResource MainMenu}" Click="btnLoginLogout_OnClick" Content="{Binding LoginButtonText}" Grid.Row="6" />
+                
+                <Button x:Name="btnCreateAccount" Style="{StaticResource MainMenu}" IsEnabled="{Binding CreateAccountEnabled, Mode=TwoWay}" Click="btnCreateAccount_OnClick" Content="CREATE ACCOUNT" Grid.Row="7" />
             </Grid>
         </Grid>
 
@@ -83,6 +86,43 @@
                 <Button x:Name="btnLogin" VerticalAlignment="Bottom" Margin="20,0,20,10" IsEnabled="{Binding LoginEnabled, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLogin_Click" Content="LOGIN" Grid.Row="4" />
 
                 <Button x:Name="btnCancel" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnCancel_Click" Content="CANCEL" Grid.Row="5" />
+            </Grid>
+        </Popup>
+        
+        <Popup x:Name="pCreateAccount">
+            <Grid x:Name="gCreateAccount" HorizontalAlignment="Center" VerticalAlignment="Center" Height="550" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="FIRST NAME" Grid.Row="0" />
+                <TextBox Grid.Row="1" FontSize="20" Text="{Binding caFirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,0" />
+               
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="LAST NAME" Grid.Row="2" />
+                <TextBox Grid.Row="3" FontSize="20" Text="{Binding caLastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,0" />
+               
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="EMAIL" Grid.Row="4" />
+                <TextBox Grid.Row="5" FontSize="20" Text="{Binding caUsername, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,0" />
+                
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="PASSWORD" Grid.Row="6" />
+                <PasswordBox Grid.Row="7" FontSize="20" Margin="20,0,20,20" Password="{Binding caPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                
+                <Button x:Name="btnCreate" VerticalAlignment="Bottom" Margin="20,0,20,10" IsEnabled="{Binding CreateEnabled, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnCreate_Click" Content="CREATE ACCOUNT" Grid.Row="8" />
+
+                <Button x:Name="btnCancelCreateAccount" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnCancelCreateAccount_Click" Content="CANCEL" Grid.Row="9" />
             </Grid>
         </Popup>
     </Grid>

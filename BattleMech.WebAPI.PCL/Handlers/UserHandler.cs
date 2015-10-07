@@ -8,6 +8,6 @@ namespace BattleMech.WebAPI.PCL.Handlers {
     public class UserHandler : BaseHandler {
         public UserHandler(HandlerItem handlerItem) : base(handlerItem, "Users") { }
 
-        public async Task<CTI<bool>> AddUser(Users user) { return await PUT<Users, bool>(user); }
+        public async Task<CTI<bool>> AddUser(Users user) { return await PUT<Users, CTI<bool>>(user); }
     }
 }

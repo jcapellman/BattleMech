@@ -9,7 +9,7 @@ using BattleMech.WebAPI.Managers;
 namespace BattleMech.WebAPI.Handlers {
     public class Authandler : DelegatingHandler {
         protected async override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) {
-            if (request.RequestUri.PathAndQuery == "/api/Auth") {
+            if (request.RequestUri.PathAndQuery == "/api/Auth" || request.RequestUri.PathAndQuery == "/api/Users") {
                 return await base.SendAsync(request, cancellationToken);
             }
 
