@@ -11,6 +11,8 @@ namespace BattleMech.UWP {
     sealed partial class App {
         public static GamePage Game;
 
+        public static string Token;
+
         public App() {
             InitializeComponent();
             Suspending += OnSuspending;

@@ -10,6 +10,7 @@
         <Setter Property="FontSize" Value="36" />        
         <Setter Property="Margin" Value="0,0,0,50" />
         <Setter Property="FontFamily" Value="Fonts/Font.TTF#Battletech Oldstyle" />
+        <Setter Property="MinHeight" Value="30" />
     </Style>
     
     <Style TargetType="TextBlock" x:Key="MenuHeader">
@@ -24,5 +25,11 @@
         <Setter Property="FontSize" Value="35" />
         <Setter Property="Foreground" Value="Yellow" />
         <Setter Property="Margin" Value="20,20,0,0"></Setter>
+    </Style>
+    
+    <Style TargetType="TextBlock" x:Key="Label">
+        <Setter Property="FontFamily" Value="Fonts/Font.TTF#Battletech Oldstyle" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="Foreground" Value="Yellow" />
     </Style>
 </ResourceDictionary>

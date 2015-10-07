@@ -6,6 +6,8 @@ using BattleMech.WebAPI.PCL.Handlers;
 
 namespace BattleMech.PCL.ViewModels {
     public class CharacterProfileModel : BaseViewModel {
+        public CharacterProfileModel(string token) : base(token) { }
+
         private ObservableCollection<PlayerGameListingView> _gameHistory; 
 
         public ObservableCollection<PlayerGameListingView> GameHistory {
@@ -22,8 +24,6 @@ namespace BattleMech.PCL.ViewModels {
         }
 
         public async Task<bool> LoadData() {
-            var login = await AttemptLogin("Test", "Test");
-
             var character = await new CharacterProfileHandler(Handler).GET();
 
             if (!character.HasError) {

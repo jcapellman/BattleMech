@@ -8,9 +8,9 @@ namespace BattleMech.UWP {
         private LeaderboardModel viewModel => (LeaderboardModel) DataContext;
 
         public LeaderboardPage() {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            DataContext = new LeaderboardModel();
+            DataContext = new LeaderboardModel(App.Token);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e) { await viewModel.LoadData(); }

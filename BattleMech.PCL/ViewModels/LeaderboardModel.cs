@@ -6,6 +6,8 @@ using BattleMech.WebAPI.PCL.Handlers;
 
 namespace BattleMech.PCL.ViewModels {
     public class LeaderboardModel : BaseViewModel {
+        public LeaderboardModel(string token) : base(token) { }
+
         private ObservableCollection<LeaderboardView> _leaderboardListing;
 
         public ObservableCollection<LeaderboardView> LeaderboardListing {
@@ -15,8 +17,6 @@ namespace BattleMech.PCL.ViewModels {
         }
 
         public async Task<bool> LoadData() {
-            var login = await AttemptLogin("Test", "Test");
-
             var leaderboardHandler = new LeaderboardHandler(Handler);
 
             var result = await leaderboardHandler.GetLeaderboardList();

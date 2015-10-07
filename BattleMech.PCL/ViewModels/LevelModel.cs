@@ -6,6 +6,8 @@ using BattleMech.WebAPI.PCL.Handlers;
 
 namespace BattleMech.PCL.ViewModels {
     public class LevelModel : BaseViewModel {
+        public LevelModel(string token) : base(token) { }
+
         private ObservableCollection<LevelListingView> _levelListing;
          
         public ObservableCollection<LevelListingView> LevelListing {
@@ -15,8 +17,6 @@ namespace BattleMech.PCL.ViewModels {
         }
 
         public async Task<bool> LoadData() {
-            var login = await AttemptLogin("Test", "Test");
-
             var levelHandler = new LevelHandler(Handler);
 
             var result = await levelHandler.GetLevelList();

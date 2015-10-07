@@ -23,18 +23,18 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            
+
             <Image Grid.Row="0" Margin="20,0,20,20" Source="Assets/Logo.png" />
             <Image Grid.Row="1" Margin="20,0,20,20" Stretch="UniformToFill" Source="Assets/MechMainMenu.png" />
         </Grid>
 
         <!-- Right Hand Menu -->
-        <Grid Grid.Column="1" HorizontalAlignment="Stretch" MinWidth="425">
+        <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" MinWidth="425">
             <Grid.Background>
                 <SolidColorBrush Color="Black" Opacity="0.75" />
             </Grid.Background>
 
-            <Grid Margin="10,50,10,50">
+            <Grid Margin="10,50,10,20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -42,20 +42,49 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
-                <Button x:Name="btnNewGame" Style="{StaticResource MainMenu}" Click="btnNewGame_OnClick" Content="NEW GAME" Grid.Row="0" />
-            
-                <Button x:Name="btnCustomGame" Style="{StaticResource MainMenu}" Click="btnCustomGame_OnCLick" Content="CUSTOM GAME" Grid.Row="1" />
-            
-                <Button x:Name="btnCharacterProfile" Style="{StaticResource MainMenu}" Click="btnCharacterProfile_OnClick" Content="CHARACTER PROFILE" Grid.Row="2" />
-            
-                <Button x:Name="btnLeaderboard" Style="{StaticResource MainMenu}" Click="btnLeaderboard_OnClick" Content="LEADERBOARD" Grid.Row="3" />
-            
+
+                <Button x:Name="btnNewGame" IsEnabled="{Binding IsLoggedIn, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnNewGame_OnClick" Content="NEW GAME" Grid.Row="0" />
+
+                <Button x:Name="btnCustomGame" IsEnabled="{Binding IsLoggedIn, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnCustomGame_OnCLick" Content="CUSTOM GAME" Grid.Row="1" />
+
+                <Button x:Name="btnCharacterProfile" IsEnabled="{Binding IsLoggedIn, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnCharacterProfile_OnClick" Content="CHARACTER PROFILE" Grid.Row="2" />
+
+                <Button x:Name="btnLeaderboard" IsEnabled="{Binding IsLoggedIn, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLeaderboard_OnClick" Content="LEADERBOARD" Grid.Row="3" />
+
                 <Button x:Name="btnOptions" Style="{StaticResource MainMenu}" Click="btnOptions_OnClick" Content="OPTIONS" Grid.Row="4" />
-            
+
                 <Button x:Name="btnCredits" Style="{StaticResource MainMenu}" Click="btnCredits_OnClick" Content="CREDITS" Grid.Row="5" />
+
+                <Button x:Name="btnLoginLogout" VerticalAlignment="Bottom" Style="{StaticResource MainMenu}" Click="btnLoginLogout_OnClick" Content="{Binding LoginButtonText}" Grid.Row="6" />
             </Grid>
         </Grid>
+
+        <Popup x:Name="pLogin">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="EMAIL" Grid.Row="0" />
+                <TextBox Grid.Row="1" FontSize="20" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,0" />
+                
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="PASSWORD" Grid.Row="2" />
+                <PasswordBox Grid.Row="3" FontSize="20" Margin="20,0,20,20" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                
+                <Button x:Name="btnLogin" VerticalAlignment="Bottom" Margin="20,0,20,10" IsEnabled="{Binding LoginEnabled, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLogin_Click" Content="LOGIN" Grid.Row="4" />
+
+                <Button x:Name="btnCancel" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnCancel_Click" Content="CANCEL" Grid.Row="5" />
+            </Grid>
+        </Popup>
     </Grid>
 </Page>

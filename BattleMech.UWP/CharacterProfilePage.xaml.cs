@@ -11,9 +11,9 @@ namespace BattleMech.UWP {
         public CharacterProfilePage() {
             this.InitializeComponent();
 
-            DataContext = new CharacterProfileModel();
+            DataContext = new CharacterProfileModel(App.Token);
         }
-
+        
         protected override async void OnNavigatedTo(NavigationEventArgs e) { await viewModel.LoadData(); }
 
         private void btnBack_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }

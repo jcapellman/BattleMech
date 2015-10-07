@@ -10,7 +10,7 @@ namespace BattleMech.UWP {
         public CustomGamePage() {
             this.InitializeComponent();
 
-            DataContext = new LevelModel();            
+            DataContext = new LevelModel(App.Token);            
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e) { await viewModel.LoadData(); }
