@@ -50,8 +50,8 @@ namespace BattleMech.UWP {
 
                 App.Token = string.Empty;
             } else {
-                pLogin.HorizontalOffset = (Window.Current.Bounds.Width - 600) / 2;
-                pLogin.VerticalOffset = (Window.Current.Bounds.Height - 400) / 2;
+                pLogin.HorizontalOffset = (Window.Current.Bounds.Width - gLogin.Width) / 2;
+                pLogin.VerticalOffset = (Window.Current.Bounds.Height - gLogin.Height) / 2;
 
                 pLogin.IsOpen = true;
             }

@@ -62,8 +62,7 @@
         </Grid>
 
         <Popup x:Name="pLogin">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
-                
+            <Grid x:Name="gLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
