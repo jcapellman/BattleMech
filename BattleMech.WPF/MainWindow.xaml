@@ -10,6 +10,8 @@
     <Grid xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Background="#2e2e2e">
         <Menu IsMainMenu="True">
             <MenuItem Header="File">
+                <MenuItem Header="Login" x:Name="miLogin" Click="miLogin_Click" />
+                <Separator />
                 <MenuItem Header="New..." />
                 <Separator />
                 <MenuItem Header="Open..." />
@@ -20,5 +22,23 @@
             </MenuItem>
             <MenuItem Header="About" />
         </Menu>
+        
+        <Popup x:Name="pLogin">
+            <Grid x:Name="gLogin">
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="EMAIL" Grid.Row="0" />
+                    <TextBox Grid.Row="1" FontSize="20" Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,0" />
+
+                    <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="PASSWORD" Grid.Row="2" />
+                    <PasswordBox Grid.Row="3" FontSize="20" Margin="20,0,20,20" />
+
+                    <CheckBox Grid.Row="4" Margin="20,0,20,0" x:Name="tsRememberLogin" Content="REMEMBER LOGIN" Style="{StaticResource MenuToggle}" IsChecked="{Binding RememberLogin, Mode=TwoWay}" />
+
+                    <Button x:Name="btnLogin" VerticalAlignment="Bottom" Margin="20,0,20,10" IsEnabled="{Binding LoginEnabled, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLogin_Click" Content="LOGIN" Grid.Row="5" />
+
+                    <Button x:Name="btnCancel" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnCancel_Click" Content="CANCEL" Grid.Row="6" />
+                </StackPanel>
+            </Grid>
+        </Popup>
     </Grid>
 </Controls:MetroWindow>
