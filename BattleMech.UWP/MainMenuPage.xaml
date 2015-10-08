@@ -65,7 +65,7 @@
         </Grid>
 
         <Popup x:Name="pLogin">
-            <Grid x:Name="gLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Height="400" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
+            <Grid x:Name="gLogin" HorizontalAlignment="Center" VerticalAlignment="Center" Height="450" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -75,6 +75,7 @@
                     
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
                 <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="EMAIL" Grid.Row="0" />
@@ -83,9 +84,11 @@
                 <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="PASSWORD" Grid.Row="2" />
                 <PasswordBox Grid.Row="3" FontSize="20" Margin="20,0,20,20" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 
-                <Button x:Name="btnLogin" VerticalAlignment="Bottom" Margin="20,0,20,10" IsEnabled="{Binding LoginEnabled, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLogin_Click" Content="LOGIN" Grid.Row="4" />
+                <ToggleSwitch Grid.Row="4" Margin="20,0,20,0" x:Name="tsRememberLogin" Header="REMEMBER LOGIN" Style="{StaticResource MenuToggle}" IsOn="{Binding RememberLogin, Mode=TwoWay}" />
+                
+                <Button x:Name="btnLogin" VerticalAlignment="Bottom" Margin="20,0,20,10" IsEnabled="{Binding LoginEnabled, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLogin_Click" Content="LOGIN" Grid.Row="5" />
 
-                <Button x:Name="btnCancel" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnCancel_Click" Content="CANCEL" Grid.Row="5" />
+                <Button x:Name="btnCancel" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnCancel_Click" Content="CANCEL" Grid.Row="6" />
             </Grid>
         </Popup>
         

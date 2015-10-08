@@ -32,4 +32,10 @@
         <Setter Property="FontSize" Value="25" />
         <Setter Property="Foreground" Value="Yellow" />
     </Style>
+    
+    <Style TargetType="ToggleSwitch" x:Key="MenuToggle">
+        <Setter Property="FontFamily" Value="Fonts/Font.TTF#Battletech Oldstyle" />
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="Foreground" Value="Yellow" />
+    </Style>
 </ResourceDictionary>

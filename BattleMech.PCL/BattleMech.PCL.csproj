@@ -45,6 +45,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Enums\SETTING_OPTIONS.cs" />
     <Compile Include="Enums\TEXTURABLE_ITEM_TYPES.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
     <Compile Include="Managers\Game\BaseGameManager.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Objects\Game\LevelObject.cs" />
     <Compile Include="Objects\Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSI\BaseSettingsPSI.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CharacterProfileModel.cs" />
     <Compile Include="ViewModels\LeaderboardModel.cs" />

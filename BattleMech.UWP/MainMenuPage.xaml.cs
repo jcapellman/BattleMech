@@ -8,6 +8,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
+using BattleMech.UWP.PSI;
 
 namespace BattleMech.UWP {
     public sealed partial class MainMenuPage : Page {
@@ -24,10 +25,23 @@ namespace BattleMech.UWP {
         public MainMenuPage() {
             InitializeComponent();
 
-            DataContext = new MainMenuModel(App.Token);
+            DataContext = new MainMenuModel(App.Token, new SettingsPSI());
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e) { viewModel.LoadData(); }
+        protected override async void OnNavigatedTo(NavigationEventArgs e) {
+            var result = await viewModel.LoadData();
+
+            if (!result) {
+                return;
+            }
+
+            App.Token = viewModel.Token;
+
+            viewModel.Username = string.Empty;
+            viewModel.Password = string.Empty;
+
+            pLogin.IsOpen = false;
+        }
 
         private void btnNewGame_OnClick(object sender, RoutedEventArgs e) {
             App.Game = new GamePage();

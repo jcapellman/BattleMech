@@ -1,10 +1,14 @@
-﻿using BattleMech.WebAPI.PCL.Handlers;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+
+using BattleMech.PCL.PSI;
+using BattleMech.WebAPI.PCL.Handlers;
 
 namespace BattleMech.PCL.ViewModels {
     public class MainMenuModel : BaseViewModel {
-        public MainMenuModel(string token) : base(token) {  }
+        private BaseSettingsPSI _settingPSI;
+
+        public MainMenuModel(string token, BaseSettingsPSI setting) : base(token) { _settingPSI = setting;  }
 
         private bool _createAccountEnabled;
 
@@ -30,6 +34,10 @@ namespace BattleMech.PCL.ViewModels {
 
         public bool LoginEnabled {  get { return _loginEnabled; } set { _loginEnabled = value; OnPropertyChanged(); } }
 
+        private bool _rememberLogin;
+
+        public bool RememberLogin { get { return _rememberLogin; } set { _rememberLogin = value; OnPropertyChanged(); } }
+
         private bool _createEnabled;
 
         public bool CreateEnabled { get { return _createEnabled; } set { _createEnabled = value; OnPropertyChanged(); } }
@@ -50,10 +58,19 @@ namespace BattleMech.PCL.ViewModels {
 
         public string caLastName { get { return _caLastName; } set { _caLastName = value; OnPropertyChanged(); CreateEnabled = checkCreateForm(); } }
 
-        public void LoadData() {
+        public async Task<bool> LoadData() {
             IsLoggedIn = !string.IsNullOrEmpty(_token);
             LoginButtonText = (IsLoggedIn ? "LOGOUT" : "LOGIN");
             CreateAccountEnabled = !IsLoggedIn;
+
+            if (_settingPSI.Get<bool>(Enums.SETTING_OPTIONS.REMEMBER_LOGIN)) {
+                Username = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.USERNAME);
+                Password = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.PASSWORD);
+
+                return await AttemptLogin();
+            }
+
+            return false;
         }
 
         public string Token { get; set; }
@@ -73,17 +90,23 @@ namespace BattleMech.PCL.ViewModels {
                 IsLoggedIn = true;
                 LoginButtonText = "LOGOUT";
                 Token = result.Token;
+
+                if (RememberLogin) {
+                    _settingPSI.Write(Enums.SETTING_OPTIONS.USERNAME, Username);
+                    _settingPSI.Write(Enums.SETTING_OPTIONS.PASSWORD, Password);
+                    _settingPSI.Write(Enums.SETTING_OPTIONS.REMEMBER_LOGIN, RememberLogin);
+                }
             } else {
                 LoginButtonText = "LOGIN";
+
+                _settingPSI.Delete(Enums.SETTING_OPTIONS.USERNAME);
+                _settingPSI.Delete(Enums.SETTING_OPTIONS.PASSWORD);
+                _settingPSI.Delete(Enums.SETTING_OPTIONS.REMEMBER_LOGIN);
             }
 
             CreateAccountEnabled = !IsLoggedIn;
 
             return result != null && !string.IsNullOrEmpty(result.Token);
-        }
-
-        public void ClearAccountForm() {
-            throw new NotImplementedException();
         }
 
         public void Logout() {
