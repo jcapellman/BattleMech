@@ -57,6 +57,8 @@ namespace BattleMech.UWP {
 
         private void btnCredits_OnClick(object sender, RoutedEventArgs e) { Frame.Navigate(typeof (CreditsPage)); }
 
+        private void btnLevelEditor_OnClick(object sender, RoutedEventArgs e) { Frame.Navigate(typeof(LevelEditor)); }
+
         private void btnLeaderboard_OnClick(object sender, RoutedEventArgs e) { Frame.Navigate(typeof (LeaderboardPage)); }
 
         private void btnLoginLogout_OnClick(object sender, RoutedEventArgs e) {

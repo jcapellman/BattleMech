@@ -56,6 +56,7 @@
     <Compile Include="Transports\Common\CTI.cs" />
     <Compile Include="Transports\CharacterProfile\CharacterProfileResponseItem.cs" />
     <Compile Include="Transports\Internal\HandlerItem.cs" />
+    <Compile Include="Transports\Levels\LevelEditorResponseItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -72,6 +73,7 @@
       <Name>BattleMech.DataLayer.PCL</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -45,6 +45,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Enums\ASSET_TYPES.cs" />
     <Compile Include="Enums\SETTING_OPTIONS.cs" />
     <Compile Include="Enums\TEXTURABLE_ITEM_TYPES.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\CharacterProfileModel.cs" />
     <Compile Include="ViewModels\LeaderboardModel.cs" />
+    <Compile Include="ViewModels\LevelEditorModel.cs" />
     <Compile Include="ViewModels\LevelModel.cs" />
     <Compile Include="ViewModels\MainMenuModel.cs" />
   </ItemGroup>

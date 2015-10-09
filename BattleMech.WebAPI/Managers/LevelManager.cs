@@ -5,9 +5,13 @@ using System.Linq;
 using BattleMech.DataLayer.Contexts;
 using BattleMech.DataLayer.PCL.Views.Levels;
 using BattleMech.WebAPI.PCL.Transports.Common;
+using BattleMech.WebAPI.PCL.Transports.Levels;
+using BattleMech.WebAPI.Transports.Internal;
 
 namespace BattleMech.WebAPI.Managers {
     public class LevelManager : BaseManager {
+        public LevelManager(AuthorizedUser authorizedUser = null) : base(authorizedUser) { }
+
         public CTI<List<LevelListingView>> GetLevelListing() {
             try {
                 using (var levelContext = new LevelContext()) {
@@ -18,6 +22,20 @@ namespace BattleMech.WebAPI.Managers {
             } catch (Exception ex) {
                 return new CTI<List<LevelListingView>>(null, ex.ToString());
             }
-        } 
+        }
+
+        internal CTI<LevelEditorResponseItem> GetEditorData(int authorID) {
+            try {
+                using (var levelContext = new LevelContext()) {
+                    var response = new LevelEditorResponseItem();
+
+                    response.AssetTypes = levelContext.ActiveAssetTypesDS.ToList();
+
+                    return new CTI<LevelEditorResponseItem>(response);
+                }
+            } catch (Exception ex) {
+                return new CTI<LevelEditorResponseItem>(null, ex.ToString());
+            }
+        }
     }
 }
