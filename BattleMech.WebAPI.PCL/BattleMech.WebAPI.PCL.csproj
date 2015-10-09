@@ -48,6 +48,7 @@
     <Compile Include="Handlers\CharacterProfileHandler.cs" />
     <Compile Include="Handlers\GameMetricHandler.cs" />
     <Compile Include="Handlers\LeaderboardHandler.cs" />
+    <Compile Include="Handlers\LevelEditorHandler.cs" />
     <Compile Include="Handlers\LevelHandler.cs" />
     <Compile Include="Handlers\UserHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

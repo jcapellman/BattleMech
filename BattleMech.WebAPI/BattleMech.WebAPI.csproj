@@ -194,6 +194,7 @@
     <Compile Include="Controllers\CharacterProfileController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\LevelController.cs" />
+    <Compile Include="Controllers\LevelEditorController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\GameMetricController.cs" />
