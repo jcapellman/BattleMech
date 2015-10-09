@@ -59,7 +59,7 @@
 
                 <Button x:Name="btnCredits" Style="{StaticResource MainMenu}" Click="btnCredits_OnClick" Content="CREDITS" Grid.Row="5" />
 
-                <Button x:Name="btnLevelEditor" Style="{StaticResource MainMenu}" Click="btnLevelEditor_OnClick" Content="LEVEL EDITOR" Grid.Row="6" />
+                <Button x:Name="btnLevelEditor" IsEnabled="{Binding IsLoggedIn, Mode=TwoWay}" Style="{StaticResource MainMenu}" Click="btnLevelEditor_OnClick" Content="LEVEL EDITOR" Grid.Row="6" />
                 
                 <Button x:Name="btnLoginLogout" VerticalAlignment="Bottom" Style="{StaticResource MainMenu}" Click="btnLoginLogout_OnClick" Content="{Binding LoginButtonText}" Grid.Row="7" />
                 
