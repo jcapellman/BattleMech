@@ -6,6 +6,7 @@ using BattleMech.PCL.Objects.Game.Base;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using BattleMech.PCL.Objects.Game;
+using System.Linq;
 
 namespace BattleMech.PCL.Managers.Game {
     public abstract class BaseGameManager<T> where T : BaseRenderable {
@@ -20,6 +21,16 @@ namespace BattleMech.PCL.Managers.Game {
             _items = new Dictionary<Guid, T>();
 
             _content = content;
+        }
+
+        /// <summary>
+        /// Implements pool logic for getting renderable object
+        /// </summary>
+        /// <typeparam name="T">The object type to get</typeparam>
+        /// <returns></returns>
+        public BaseRenderable GetRenderable<T>() where T : BaseRenderable
+        {
+            return _items.Values.FirstOrDefault(r => r.GetType() == typeof(T) && r.IsActive == false);
         }
 
         public virtual void DisposeItem(BaseRenderable item)

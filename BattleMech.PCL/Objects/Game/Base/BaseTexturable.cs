@@ -20,6 +20,13 @@ namespace BattleMech.PCL.Objects.Game.Base {
             ItemType = itemType;
         }
 
+        public void Init(Texture2D texture)
+        {
+            this.Texture = texture;
+
+            IsActive = true;
+        }
+
         public override Rectangle GetRectange() {
             if (IsFullScreen) {
                 return new Rectangle(0, 0, (int) PositionX, (int) PositionY);

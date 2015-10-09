@@ -26,14 +26,23 @@ namespace BattleMech.PCL.Managers.Game {
         }
 
         public BaseTexturable AddTextureItem<T>(string textureName) where T : BaseTexturable {
-            var item = (T) Activator.CreateInstance(typeof (T), _content.Load<Texture2D>(textureName));
+            //get an available renderable of the type T
+            var item = GetRenderable<T>() as BaseTexturable;
 
-            if (item.IsFullScreen) {
-                item.PositionX = _windowWidth;
-                item.PositionY = _windowHeight;
+            //create a new instance if there was not one available
+            if (item == null){
+                item = (T)Activator.CreateInstance(typeof(T), _content.Load<Texture2D>(textureName));
+
+                if (item.IsFullScreen){
+                    item.PositionX = _windowWidth;
+                    item.PositionY = _windowHeight;
+                }
+                
+                AddItem(item);
+            }else{
+                item.Init(_content.Load<Texture2D>(textureName));
             }
 
-            AddItem(item);
             return item;
         }
 
