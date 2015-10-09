@@ -28,9 +28,11 @@ namespace BattleMech.PCL.Managers.Game {
         /// </summary>
         /// <typeparam name="T">The object type to get</typeparam>
         /// <returns></returns>
-        public BaseRenderable GetRenderable<T>() where T : BaseRenderable
+        public List<BaseRenderable> GetRenderable<T>(int? limit = 1) where T : BaseRenderable
         {
-            return _items.Values.FirstOrDefault(r => r.GetType() == typeof(T) && r.IsActive == false);
+            return _items.Values.Where(r => r.GetType() == typeof(T) && r.IsActive == false).Take(limit.Value).Cast<BaseRenderable>().ToList();
+
+            //return _items.Values.FirstOrDefault(r => r.GetType() == typeof(T) && r.IsActive == false);
         }
 
         public virtual void DisposeItem(BaseRenderable item)

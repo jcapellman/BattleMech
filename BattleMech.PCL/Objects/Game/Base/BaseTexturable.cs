@@ -2,6 +2,7 @@
 using BattleMech.PCL.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace BattleMech.PCL.Objects.Game.Base {
     public class BaseTexturable : BaseRenderable, ICollidable
@@ -13,6 +14,8 @@ namespace BattleMech.PCL.Objects.Game.Base {
         public bool IsFullScreen;
 
         public bool IsColliding { get; set; }
+
+        public Func<Rectangle, bool> CheckOnScreen;
 
         public BaseTexturable(Texture2D texture, TEXTURABLE_ITEM_TYPES itemType) {
             Texture = texture;

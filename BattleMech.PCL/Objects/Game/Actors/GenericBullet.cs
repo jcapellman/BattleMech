@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace BattleMech.PCL.Objects.Game.Actors
 {
@@ -16,6 +17,13 @@ namespace BattleMech.PCL.Objects.Game.Actors
             MoveX = 10.0f;
             PositionX = 400.0f;
             PositionY = 400.0f;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            if (CheckOnScreen != null && !CheckOnScreen(GetRectange())) IsActive = false;
         }
     }
 }

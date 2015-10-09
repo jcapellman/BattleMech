@@ -18,6 +18,21 @@ namespace BattleMech.PCL.Managers.Game {
         private readonly int _windowHeight;
         private readonly int _windowWidth;
 
+        #region Helper Methods
+
+        public bool IsOnScreen(Rectangle objRect)
+        {
+            if( (objRect.Right > 0 && objRect.Left < _windowWidth) &&
+                (objRect.Bottom > 0 && objRect.Top < _windowHeight) )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        #endregion
+
         public TexturableManager(ContentManager content) : base(content) { }
 
         public TexturableManager(ContentManager content, int windowWidth, int windowHeight) : this(content) {
@@ -27,7 +42,7 @@ namespace BattleMech.PCL.Managers.Game {
 
         public BaseTexturable AddTextureItem<T>(string textureName) where T : BaseTexturable {
             //get an available renderable of the type T
-            var item = GetRenderable<T>() as BaseTexturable;
+            var item = GetRenderable<T>().FirstOrDefault() as BaseTexturable;
 
             //create a new instance if there was not one available
             if (item == null){
@@ -37,12 +52,13 @@ namespace BattleMech.PCL.Managers.Game {
                     item.PositionX = _windowWidth;
                     item.PositionY = _windowHeight;
                 }
-                
+                item.CheckOnScreen = IsOnScreen;
                 AddItem(item);
             }else{
                 item.Init(_content.Load<Texture2D>(textureName));
             }
 
+            Debug.WriteLine($"Total Items: {_items.Count}");
             return item;
         }
 
