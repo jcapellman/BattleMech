@@ -24,12 +24,12 @@ namespace BattleMech.WebAPI.Managers {
             }
         }
 
-        internal CTI<LevelEditorResponseItem> GetEditorData(int authorID) {
+        internal CTI<LevelEditorResponseItem> GetEditorData() {
             try {
                 using (var levelContext = new LevelContext()) {
-                    var response = new LevelEditorResponseItem();
-
-                    response.AssetTypes = levelContext.ActiveAssetTypesDS.ToList();
+                    var response = new LevelEditorResponseItem {
+                        AssetTypes = levelContext.ActiveAssetTypesDS.ToList()
+                    };
 
                     return new CTI<LevelEditorResponseItem>(response);
                 }
