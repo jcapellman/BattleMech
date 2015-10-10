@@ -26,9 +26,9 @@ namespace BattleMech.UWP {
             _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
             _tm.controller = new PCInputController();
 
-            _tm.AddTextureItem<Background>("Blue_Stars.jpg");
-            _tm.AddTextureItem<Player>("mech.png");
-            _tm.AddTextureItem<Enemy>("enemy.png");
+            _tm.AddTextureItem<Background>("Background/Blue_Stars.jpg");
+            _tm.AddTextureItem<Player>("Player/mech.png");
+            _tm.AddTextureItem<Enemy>("Enemy/gimp.png");
         }
 
         protected override void UnloadContent() {

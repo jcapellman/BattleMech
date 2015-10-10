@@ -97,7 +97,7 @@ namespace BattleMech.PCL.Managers.Game {
                         player.Accelerate(MOVEMENT_DIRECTION.DOWN);
                         break;
                     case Keys.Space:
-                        BaseTexturable bullet = AddTextureItem<GenericBullet>("viper_blaster.png");
+                        BaseTexturable bullet = AddTextureItem<GenericBullet>("Weapon/viper_blaster.png");
                         bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
                         bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
                         break;
