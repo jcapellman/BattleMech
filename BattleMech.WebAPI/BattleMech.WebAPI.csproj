@@ -190,6 +190,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AssetsController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\CharacterProfileController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\AssetsManager.cs" />
     <Compile Include="Managers\AuthManager.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\CharacterProfileManager.cs" />

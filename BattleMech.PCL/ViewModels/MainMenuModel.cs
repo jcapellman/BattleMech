@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-
+using BattleMech.PCL.Enums;
 using BattleMech.PCL.PSI;
 using BattleMech.WebAPI.PCL.Handlers;
 
 namespace BattleMech.PCL.ViewModels {
     public class MainMenuModel : BaseViewModel {
-        private BaseSettingsPSI _settingPSI;
+        private readonly BaseSettingsPSI _settingPSI;
+        private BaseLFSPSI _lfsPSI;
 
-        public MainMenuModel(string token, BaseSettingsPSI setting) : base(token) { _settingPSI = setting;  }
+        public MainMenuModel(string token, BaseSettingsPSI setting, BaseLFSPSI lfsPSI) : base(token) {
+            _settingPSI = setting;
+            _lfsPSI = lfsPSI;
+        }
 
         private bool _createAccountEnabled;
 
@@ -67,10 +71,32 @@ namespace BattleMech.PCL.ViewModels {
                 Username = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.USERNAME);
                 Password = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.PASSWORD);
 
-                return await AttemptLogin();
+                var result = await AttemptLogin();
+
+                if (result) {
+                    return await LoadAssetData();
+                }
             }
 
             return false;
+        }
+
+        private async Task<bool> LoadAssetData() {
+            var assetHandler = new AssetHandler(Handler);
+
+            var result = await assetHandler.GetAssets(_settingPSI.Get<int>(SETTING_OPTIONS.ASSET_VERSION));
+
+            if (result.HasError) {
+                return false;
+            }
+
+            if (result.Value.ClientHasLatest) {
+                return true;
+            }
+
+            _settingPSI.Write(SETTING_OPTIONS.ASSET_VERSION, result.Value.AssetVerion);
+
+            return await _lfsPSI.WriteFile(result.Value);
         }
 
         public string Token { get; set; }

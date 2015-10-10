@@ -2,6 +2,7 @@
     public enum SETTING_OPTIONS {
         REMEMBER_LOGIN,
         USERNAME,
-        PASSWORD
+        PASSWORD,
+        ASSET_VERSION
     }
 }

@@ -156,6 +156,7 @@
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSI\LFSPSI.cs" />
     <Compile Include="PSI\SettingsPSI.cs" />
   </ItemGroup>
   <ItemGroup>

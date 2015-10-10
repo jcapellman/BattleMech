@@ -1,5 +1,4 @@
 ﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
@@ -13,7 +12,7 @@ namespace BattleMech.UWP {
         public MainMenuPage() {
             InitializeComponent();
 
-            DataContext = new MainMenuModel(App.Token, new SettingsPSI());
+            DataContext = new MainMenuModel(App.Token, new SettingsPSI(), new LFSPSI());
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e) {

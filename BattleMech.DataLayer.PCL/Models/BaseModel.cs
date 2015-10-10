@@ -10,8 +10,6 @@ namespace BattleMech.DataLayer.PCL.Models {
 
         public bool Active { get; set; }
 
-        public bool IsNew {
-            get { return ID == 0 || ID == -1; }
-        }
+        public bool IsNew => ID == 0 || ID == -1;
     }
 }
