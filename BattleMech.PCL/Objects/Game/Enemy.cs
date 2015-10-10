@@ -11,5 +11,14 @@ namespace BattleMech.PCL.Objects.Game {
             PositionX = 1200.0f;
             PositionY = 400.0f;
         }
+
+        
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            //if (CheckOnScreen != null && !CheckOnScreen(GetRectange())) IsActive = false;
+        }
     }
 }
