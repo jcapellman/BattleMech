@@ -1,4 +1,4 @@
-﻿<Page
+﻿<local:BasePage
     x:Class="BattleMech.UWP.CustomGamePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -25,7 +25,7 @@
                 <SolidColorBrush Color="Black" Opacity="0.5" />
             </Grid.Background>
 
-            <ListView ItemsSource="{Binding LevelListing}">
+            <ListView ItemsSource="{Binding LevelListing}" SelectionMode="Single" SelectedItem="{Binding SelectedLevel, Mode=TwoWay}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -80,4 +80,4 @@
             </Grid>
         </Grid>
     </Grid>
-</Page>
+</local:BasePage>

@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Navigation;
 using BattleMech.PCL.ViewModels;
 
 namespace BattleMech.UWP {
-    public sealed partial class CustomGamePage {
+    public sealed partial class CustomGamePage : BasePage {
         private LevelModel viewModel => (LevelModel) DataContext;
 
         public CustomGamePage() {
@@ -17,6 +17,19 @@ namespace BattleMech.UWP {
 
         private void btnBack_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
 
-        private void btnLaunch_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
+        private async void btnLaunch_OnClick(object sender, RoutedEventArgs e) {
+            var result = await viewModel.LoadLevel(App.Assets);
+
+            if (result == null) {
+                ShowDialog("Could not load level");
+                return;
+            }
+
+            App.CurrentLevel = result;
+
+            App.Game = new GamePage();
+
+            Window.Current.Content = App.Game;
+        }
     }
 }
