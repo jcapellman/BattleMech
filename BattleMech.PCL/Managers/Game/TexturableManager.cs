@@ -15,8 +15,8 @@ using System.Diagnostics;
 
 namespace BattleMech.PCL.Managers.Game {
     public class TexturableManager : BaseGameManager<BaseTexturable> {
-        private readonly int _windowHeight;
-        private readonly int _windowWidth;
+        private readonly float _windowHeight;
+        private readonly float _windowWidth;
 
         #region Helper Methods
 
@@ -33,6 +33,10 @@ namespace BattleMech.PCL.Managers.Game {
 
         #endregion
 
+        public float WAVE_INTERVAL = 1000;
+        public float waveTime;
+        public float nextWave;
+
         public TexturableManager(ContentManager content) : base(content) { }
 
         public TexturableManager(ContentManager content, int windowWidth, int windowHeight) : this(content) {
@@ -40,6 +44,12 @@ namespace BattleMech.PCL.Managers.Game {
             _windowHeight = windowHeight;
         }
 
+        /// <summary>
+        /// Creates a new texture item that is interactable within the game world. Calls the BaseManager's GEt Renderable that recycles unused objects.
+        /// </summary>
+        /// <typeparam name="T">The object type to create</typeparam>
+        /// <param name="textureName">The texture graphic to be used for the interable object</param>
+        /// <returns></returns>
         public BaseTexturable AddTextureItem<T>(string textureName) where T : BaseTexturable {
             //get an available renderable of the type T
             var item = GetRenderable<T>().FirstOrDefault() as BaseTexturable;
@@ -49,8 +59,8 @@ namespace BattleMech.PCL.Managers.Game {
                 item = (T)Activator.CreateInstance(typeof(T), _content.Load<Texture2D>(textureName));
 
                 if (item.IsFullScreen){
-                    item.PositionX = _windowWidth;
-                    item.PositionY = _windowHeight;
+                    item.PositionX = (float)_windowWidth;
+                    item.PositionY = (float)_windowHeight;
                 }
                 item.CheckOnScreen = IsOnScreen;
                 AddItem(item);
@@ -104,21 +114,47 @@ namespace BattleMech.PCL.Managers.Game {
                 }
             }
 
+            waveTime += gameTime.ElapsedGameTime.Milliseconds;
+            if (waveTime >= nextWave)
+            {
+                //create and position new enemy
+                var rand = new Random();
+                var enemy = AddTextureItem<Enemy>("Enemy/gimp.png");
+                enemy.PositionX = _windowWidth;
+                enemy.PositionY = (((float)rand.NextDouble() * (_windowHeight - enemy.Texture.Height * 2) + enemy.Texture.Height));
+
+                waveTime = 0;
+                nextWave = WAVE_INTERVAL;
+
+                Debug.WriteLine($"Created new enemy: id:{enemy.ID} | x: |{enemy.PositionX} | y:{enemy.PositionY}");
+            }
+
+            //prepare for collision detection between active enemies and projectiles
+            //var enemies = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.ENEMY).Where(e => e.IsActive == true);
+            //var projectiles = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.PROJECTILE).Where(p => p.IsActive == true);
+
             var enemies = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.ENEMY);
             var projectiles = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.PROJECTILE);
 
             foreach (Enemy enemy in enemies)
             {
+                if (!enemy.IsActive) continue;
+
                 foreach (GenericBullet projectile in projectiles)
                 {
-                    if(enemy.GetCollision(projectile.GetRectange() ))
+                    if (!projectile.IsActive) continue;
+
+                    if (enemy.GetCollision(projectile.GetRectange() ))
                     {
                         projectile.IsActive = false;
+                        enemy.IsActive = false;
                     }
                 }
             }
 
             base.Update(gameTime);
+
+            //Debug.WriteLine($"DEBUG: Total Enmies: {enemies.Count()} | Total Projectiles: {projectiles.Count()}");
         }
 
         public new void UpdateItem(BaseTexturable item) {
