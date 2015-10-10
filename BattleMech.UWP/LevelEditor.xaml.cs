@@ -19,5 +19,7 @@ namespace BattleMech.UWP {
         }
 
         private void btnBack_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
+
+        private void btnSavePublish_OnClick(object sender, RoutedEventArgs e) { Frame.GoBack(); }
     }
 }

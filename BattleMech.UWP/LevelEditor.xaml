@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Content/background.jpg" />
+            <ImageBrush ImageSource="Assets/background.jpg" />
         </Grid.Background>
 
         <Grid.RowDefinitions>
@@ -61,10 +61,10 @@
                 </ListView>
             </Grid>
 
-            <ListView Grid.Column="1">
+            <ListView Grid.Column="1" ItemsSource="{Binding LevelItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        
+                        <Image Source="{Binding Filename}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
@@ -73,10 +73,15 @@
         <Grid Grid.Row="2" Margin="20,0,20,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <Grid Column="0" HorizontalAlignment="Left">
                 <Button Style="{StaticResource MainMenu}" Content="BACK TO MAIN MENU" x:Name="btnBack" Click="btnBack_OnClick" />
+            </Grid>
+            
+            <Grid Column="1" HorizontalAlignment="Right">
+                <Button Style="{StaticResource MainMenu}" Content="SAVE/PUBLISH" x:Name="btnSavePublish" Click="btnSavePublish_OnClick" />
             </Grid>
         </Grid>
     </Grid>

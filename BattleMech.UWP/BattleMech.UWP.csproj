@@ -92,6 +92,7 @@
     <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Assets\background.jpg" />
     <Content Include="Fonts\Font.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -165,7 +166,6 @@
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\MechMainMenu.png" />
-    <Content Include="Content\background.jpg" />
     <Content Include="Content\Background\Blue_Stars.jpg" />
     <Content Include="Content\Enemy\Gimp.png" />
     <Content Include="Content\Background\lightgreen_stars.jpg" />

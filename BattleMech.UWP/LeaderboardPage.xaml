@@ -9,7 +9,7 @@
 
      <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Content/background.jpg" />
+            <ImageBrush ImageSource="Assets/background.jpg" />
         </Grid.Background>
 
         <Grid.RowDefinitions>
