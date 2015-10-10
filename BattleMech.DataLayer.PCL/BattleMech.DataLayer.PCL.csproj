@@ -52,10 +52,11 @@
     <Compile Include="Models\Users\Tokens.cs" />
     <Compile Include="Models\Users\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Assets\ActiveAssetsVIEW.cs" />
+    <Compile Include="Views\Assets\ActiveAssetTypes.cs" />
     <Compile Include="Views\GameMetrics\PlayerCharacterView.cs" />
     <Compile Include="Views\GameMetrics\PlayerGameListingView.cs" />
     <Compile Include="Views\Leaderboard\LeaderboardView.cs" />
-    <Compile Include="Views\Levels\ActiveAssetTypes.cs" />
     <Compile Include="Views\Levels\LevelListingView.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

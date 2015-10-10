@@ -26,9 +26,9 @@ namespace BattleMech.WebAPI.Managers {
 
         internal CTI<LevelEditorResponseItem> GetEditorData() {
             try {
-                using (var levelContext = new LevelContext()) {
+                using (var levelEditorContext = new LevelEditorContext()) {
                     var response = new LevelEditorResponseItem {
-                        AssetTypes = levelContext.ActiveAssetTypesDS.ToList()
+                        AssetTypes = levelEditorContext.ActiveAssetTypesVIEWDS.ToList()
                     };
 
                     return new CTI<LevelEditorResponseItem>(response);
