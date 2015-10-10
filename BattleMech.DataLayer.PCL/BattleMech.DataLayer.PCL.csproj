@@ -59,6 +59,7 @@
     <Compile Include="Views\GameMetrics\PlayerGameListingView.cs" />
     <Compile Include="Views\Leaderboard\LeaderboardView.cs" />
     <Compile Include="Views\Levels\LevelListingView.cs" />
+    <Compile Include="Views\Levels\LevelVIEW.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

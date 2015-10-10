@@ -55,5 +55,24 @@ namespace BattleMech.WebAPI.Managers {
                 return new CTI<LevelEditorResponseItem>(null, ex.ToString());
             }
         }
+
+        internal CTI<LevelResponseItem> GetLevel(int levelID) {
+            try {
+                using (var levelContext = new LevelContext()) {
+                    var result = levelContext.LevelVIEWDS.FirstOrDefault(a => a.ID == levelID);
+
+                    if (result == null) { return new CTI<LevelResponseItem>(null, "Could not load level"); }
+
+                    var response = new LevelResponseItem {
+                        LevelData = result.Data,
+                        Description = result.Name
+                    };
+
+                    return new CTI<LevelResponseItem>(response);
+                }
+            } catch (Exception ex) {
+                return new CTI<LevelResponseItem>(null, ex.ToString());
+            }
+        }
     }
 }
