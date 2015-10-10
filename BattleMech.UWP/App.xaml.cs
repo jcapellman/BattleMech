@@ -8,9 +8,13 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using BattleMech.DataLayer.PCL.Views.Assets;
 using BattleMech.PCL.Objects.Game;
+using BattleMech.WebAPI.PCL.Transports.CharacterProfile;
 
 namespace BattleMech.UWP {
     sealed partial class App {
+
+        public static CharacterProfileResponseItem PlayerInfo;
+
         public static GamePage Game;
 
         public static string Token;

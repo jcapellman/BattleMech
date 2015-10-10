@@ -12,8 +12,6 @@ namespace BattleMech.UWP {
         SpriteBatch _spriteBatch;
 
         private TexturableManager _tm;
-        
-        KeyboardState _currentKeyboardState;
 
         public MainGame() {
             _graphics = new GraphicsDeviceManager(this);
@@ -26,7 +24,7 @@ namespace BattleMech.UWP {
 
             _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
             _tm.controller = new PCInputController();
-
+            
             foreach (var levelObjects in App.CurrentLevel.Objects) {
                 switch (levelObjects.AssetType) {
                     case ASSET_TYPES.GFX_BACKGROUND:
@@ -35,7 +33,13 @@ namespace BattleMech.UWP {
                 }
             }
 
-            _tm.AddTextureItem<Player>("Player/mech.png");
+            //add the player's selected character to the game
+            if(App.PlayerInfo.Character != null){
+                _tm.AddTextureItem<Player>(App.PlayerInfo.Character.Name);
+            }else{
+                _tm.AddTextureItem<Player>("GFX_PLAYER/mech.png");
+            }
+            
         }
 
         protected override void UnloadContent() {

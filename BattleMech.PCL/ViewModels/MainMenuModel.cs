@@ -6,6 +6,8 @@ using BattleMech.PCL.Enums;
 using BattleMech.PCL.Objects.Game;
 using BattleMech.PCL.PSI;
 using BattleMech.WebAPI.PCL.Handlers;
+using BattleMech.WebAPI.PCL.Transports.CharacterProfile;
+using BattleMech.WebAPI.PCL.Transports.Common;
 
 namespace BattleMech.PCL.ViewModels {
     public class MainMenuModel : BaseViewModel {
@@ -129,6 +131,7 @@ namespace BattleMech.PCL.ViewModels {
                     _settingPSI.Write(Enums.SETTING_OPTIONS.PASSWORD, Password);
                     _settingPSI.Write(Enums.SETTING_OPTIONS.REMEMBER_LOGIN, RememberLogin);
                 }
+                
             } else {
                 LoginButtonText = "LOGIN";
 
@@ -140,6 +143,14 @@ namespace BattleMech.PCL.ViewModels {
             CreateAccountEnabled = !IsLoggedIn;
 
             return !string.IsNullOrEmpty(result?.Token);
+        }
+
+        public async Task<CTI<CharacterProfileResponseItem>> GetCharacterInfo()
+        {
+            var charHandler = new CharacterProfileHandler(Handler);
+            var result = await charHandler.GET();
+
+            return result;
         }
 
         public void Logout() {
@@ -174,6 +185,19 @@ namespace BattleMech.PCL.ViewModels {
             var result = await userHandler.AddUser(user);
 
             return result.Value;
+        }
+
+        public async Task<Level> GenerateLevel(List<ActiveAssetsVIEW> assets)
+        {
+            var level = new Level
+            {
+                LevelName = "RandomGeneratedLevel",
+                Objects = new List<LevelObject>()
+            };
+
+            LevelObject lvlObj = new LevelObject();
+
+            return level;
         }
     }
 }

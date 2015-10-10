@@ -107,7 +107,7 @@ namespace BattleMech.PCL.Managers.Game {
                         player.Accelerate(MOVEMENT_DIRECTION.DOWN);
                         break;
                     case Keys.Space:
-                        BaseTexturable bullet = AddTextureItem<GenericBullet>("Weapon/viper_blaster.png");
+                        BaseTexturable bullet = AddTextureItem<GenericBullet>("GFX_WEAPON/viper_blaster.png");
                         bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
                         bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
                         break;
@@ -119,7 +119,7 @@ namespace BattleMech.PCL.Managers.Game {
             {
                 //create and position new enemy
                 var rand = new Random();
-                var enemy = AddTextureItem<Enemy>("Enemy/gimp.png");
+                var enemy = AddTextureItem<Enemy>("GFX_ENEMY/Gimp.png");
                 enemy.PositionX = _windowWidth;
                 enemy.PositionY = (((float)rand.NextDouble() * (_windowHeight - enemy.Texture.Height * 2) + enemy.Texture.Height));
 
@@ -130,19 +130,17 @@ namespace BattleMech.PCL.Managers.Game {
             }
 
             //prepare for collision detection between active enemies and projectiles
-            //var enemies = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.ENEMY).Where(e => e.IsActive == true);
-            //var projectiles = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.PROJECTILE).Where(p => p.IsActive == true);
 
             var enemies = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.ENEMY);
             var projectiles = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.PROJECTILE);
 
             foreach (Enemy enemy in enemies)
             {
-                if (!enemy.IsActive) continue;
+                if (!enemy.IsActive) continue;      //could have been made in-active during the collision detection process, so ignore it
 
                 foreach (GenericBullet projectile in projectiles)
                 {
-                    if (!projectile.IsActive) continue;
+                    if (!projectile.IsActive) continue;         //could have been made in-active during the collision detection process, so ignore it
 
                     if (enemy.GetCollision(projectile.GetRectange() ))
                     {

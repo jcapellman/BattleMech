@@ -30,9 +30,20 @@ namespace BattleMech.UWP {
             App.Assets = await viewModel.LoadAssetData();
 
             pLogin.IsOpen = false;
+
+            //get the player's info if we were auto logged in
+            if (viewModel.IsLoggedIn)
+            {
+                var characterResult = await viewModel.GetCharacterInfo();
+                App.PlayerInfo = characterResult.Value;
+            }
         }
 
-        private void btnNewGame_OnClick(object sender, RoutedEventArgs e) {
+        private async void btnNewGame_OnClick(object sender, RoutedEventArgs e) {
+            var result = await viewModel.GenerateLevel(App.Assets);
+
+            App.CurrentLevel = result;
+
             App.Game = new GamePage();
             
             Window.Current.Content = App.Game;
@@ -78,6 +89,10 @@ namespace BattleMech.UWP {
             viewModel.Password = string.Empty;
 
             pLogin.IsOpen = false;
+            
+            //get the player's info for selected character, stats, etc.
+            var characterResult = await viewModel.GetCharacterInfo();
+            App.PlayerInfo = characterResult.Value;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {
