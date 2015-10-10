@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace BattleMech.DataLayer.PCL.Views.Levels {
+namespace BattleMech.DataLayer.PCL.Views.Assets {
     [DataContract]
     public class ActiveAssetTypes {
         [DataMember]

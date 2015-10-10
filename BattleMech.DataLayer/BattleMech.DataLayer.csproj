@@ -120,6 +120,7 @@
     <Compile Include="Contexts\GameMetricContext.cs" />
     <Compile Include="Contexts\LeaderboardContext.cs" />
     <Compile Include="Contexts\LevelContext.cs" />
+    <Compile Include="Contexts\LevelEditorContext.cs" />
     <Compile Include="Contexts\UserContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,12 +1,18 @@
-﻿using BattleMech.DataLayer.PCL.Views.Levels;
-using BattleMech.WebAPI.PCL.Handlers;
+﻿using BattleMech.WebAPI.PCL.Handlers;
+using BattleMech.DataLayer.PCL.Views.Assets;
 
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace BattleMech.PCL.ViewModels {
     public class LevelEditorModel : BaseViewModel {
         public LevelEditorModel(string token) : base(token) { }
+
+        private ActiveAssetTypes _selectedAssetType;
+
+        public ActiveAssetTypes SelectedAssetType {  get { return _selectedAssetType; } set { _selectedAssetType = value; OnPropertyChanged(); } }
 
         private ObservableCollection<ActiveAssetTypes> _assetTypes;
 
@@ -17,7 +23,7 @@ namespace BattleMech.PCL.ViewModels {
         }
 
         public async Task<bool> LoadData() {
-            var levelHandler = new LevelHandler(Handler);
+            var levelHandler = new LevelEditorHandler(Handler);
 
             var response = await levelHandler.GetLevelEditorData();
 
@@ -26,6 +32,8 @@ namespace BattleMech.PCL.ViewModels {
             }
 
             AssetTypes = new ObservableCollection<ActiveAssetTypes>(response.Value.AssetTypes);
+
+            SelectedAssetType = AssetTypes.FirstOrDefault();
 
             return true;
         }
