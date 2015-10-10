@@ -1,4 +1,5 @@
-﻿using BattleMech.PCL.Managers.Game;
+﻿using BattleMech.PCL.Enums;
+using BattleMech.PCL.Managers.Game;
 using BattleMech.PCL.Objects.Game;
 
 using Microsoft.Xna.Framework;
@@ -26,7 +27,14 @@ namespace BattleMech.UWP {
             _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
             _tm.controller = new PCInputController();
 
-            _tm.AddTextureItem<Background>("Background/Blue_Stars.jpg");
+            foreach (var levelObjects in App.CurrentLevel.Objects) {
+                switch (levelObjects.AssetType) {
+                    case ASSET_TYPES.GFX_BACKGROUND:
+                        _tm.AddTextureItem<Background>(levelObjects.Filename);
+                        break;
+                }
+            }
+
             _tm.AddTextureItem<Player>("Player/mech.png");
         }
 
