@@ -1,17 +1,23 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using BattleMech.DataLayer.PCL.Views.Assets;
+using BattleMech.PCL.Objects.Game;
 
 namespace BattleMech.UWP {
     sealed partial class App {
         public static GamePage Game;
 
         public static string Token;
+
+        public static List<ActiveAssetsVIEW> Assets;
+
+        public static Level CurrentLevel;
 
         public App() {
             InitializeComponent();

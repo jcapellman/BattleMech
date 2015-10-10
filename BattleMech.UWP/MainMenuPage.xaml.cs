@@ -27,6 +27,8 @@ namespace BattleMech.UWP {
             viewModel.Username = string.Empty;
             viewModel.Password = string.Empty;
 
+            App.Assets = await viewModel.LoadAssetData();
+
             pLogin.IsOpen = false;
         }
 
