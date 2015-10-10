@@ -57,7 +57,7 @@ namespace BattleMech.PCL.ViewModels {
                 Objects = new List<LevelObject>()
             };
             
-            var levelObjects = (List<LevelObjectLite>)JsonConvert.DeserializeObject(result.Value.LevelData);
+            var levelObjects = JsonConvert.DeserializeObject<List<LevelObjectLite>>(result.Value.LevelData);
 
             foreach (var item in levelObjects) {
                 var asset = assets.FirstOrDefault(a => a.ID == item.AssetID);
