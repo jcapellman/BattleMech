@@ -175,7 +175,6 @@
     <Content Include="Content\Weapon\viper_blaster.png" />
     <Content Include="Content\Background\Yellow_Stars.jpg" />
     <Content Include="Properties\Default.rd.xml" />
-    <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />

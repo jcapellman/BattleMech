@@ -1,14 +1,18 @@
 ﻿using BattleMech.WebAPI.PCL.Handlers;
 using BattleMech.DataLayer.PCL.Views.Assets;
+using BattleMech.PCL.Enums;
 
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using BattleMech.PCL.Enums;
 
 namespace BattleMech.PCL.ViewModels {
     public class LevelEditorModel : BaseViewModel {
-        public LevelEditorModel(string token) : base(token) { _assets = new ObservableCollection<ActiveAssetsVIEW>(); }
+        public LevelEditorModel(string token) : base(token) {
+            _assets = new ObservableCollection<ActiveAssetsVIEW>();
+
+            LevelItems = new ObservableCollection<LEVELITEM>();
+        }
 
         private ActiveAssetTypes _selectedAssetType;
 
@@ -27,6 +31,24 @@ namespace BattleMech.PCL.ViewModels {
         public ObservableCollection<ActiveAssetsVIEW> Assets {
             get { return new ObservableCollection<ActiveAssetsVIEW>(_assets.Where(a => a.AssetTypeID == SelectedAssetType.ID)); }
             set { _assets = value; OnPropertyChanged(); }
+        }
+
+        public struct LEVELITEM {
+            public int AssetID { get; set; }
+
+            public string Filename { get; set; }
+        }
+
+        private ObservableCollection<LEVELITEM> _levelItems;
+
+        public ObservableCollection<LEVELITEM> LevelItems { get { return _levelItems; } set { _levelItems = value; OnPropertyChanged(); } }
+
+        private ActiveAssetsVIEW _selectedAsset;
+
+        public ActiveAssetsVIEW SelectedAsset {  get { return _selectedAsset; } set { _selectedAsset = value; OnPropertyChanged(); } }
+
+        public void AddItem() {
+            LevelItems.Add(new LEVELITEM { AssetID = SelectedAsset.ID, Filename = SelectedAsset.Filename });
         }
 
         public async Task<bool> LoadData() {
