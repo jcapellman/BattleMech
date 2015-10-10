@@ -8,5 +8,8 @@ namespace BattleMech.WebAPI.PCL.Transports.Levels {
     public class LevelEditorResponseItem {
         [DataMember]
         public List<ActiveAssetTypes> AssetTypes { get; set; }
+
+        [DataMember]
+        public List<ActiveAssetsVIEW> Assets { get; set; }
     }
 }
