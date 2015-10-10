@@ -7,6 +7,6 @@ namespace BattleMech.WebAPI.Controllers {
     public class LevelEditorController : BaseController {
         public CTI<LevelEditorResponseItem> GET() { return new LevelManager(AUTH_USER).GetEditorData(); }
 
-        public CTI<bool> POST(Levels level) { return new LevelManager(AUTH_USER).AddUpdateLevel(level); }
+        public CTI<bool> PUT(Levels level) { return new LevelManager(AUTH_USER).AddUpdateLevel(level); }
     }
 }

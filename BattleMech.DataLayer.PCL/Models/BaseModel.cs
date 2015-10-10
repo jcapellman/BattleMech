@@ -11,7 +11,7 @@ namespace BattleMech.DataLayer.PCL.Models {
         public bool Active { get; set; }
 
         public bool IsNew {
-            get { return ID == 0; }
+            get { return ID == 0 || ID == -1; }
         }
     }
 }

@@ -24,9 +24,9 @@ namespace BattleMech.DataLayer.Contexts {
             var modifiedLevels = ChangeTracker.Entries<Levels>().Where(a => a.State == EntityState.Added || a.State == EntityState.Modified);
 
             foreach (var item in modifiedLevels) {
-                if (item.Property<int>("ID").CurrentValue == 0) {
+                if (item.Entity.IsNew) {
                     item.Property("Created").CurrentValue = DateTimeOffset.Now;
-                    item.Property("Active").CurrentValue = true;
+                    item.Property<bool>("Active").CurrentValue = true;
                 }
 
                 item.Property("Modified").CurrentValue = DateTimeOffset.Now;
