@@ -9,5 +9,9 @@ namespace BattleMech.DataLayer.PCL.Models {
         public DateTimeOffset Created { get; set; }
 
         public bool Active { get; set; }
+
+        public bool IsNew {
+            get { return ID == 0; }
+        }
     }
 }

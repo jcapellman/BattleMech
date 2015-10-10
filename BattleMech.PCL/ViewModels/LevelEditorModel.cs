@@ -1,6 +1,7 @@
 ﻿using BattleMech.WebAPI.PCL.Handlers;
 using BattleMech.DataLayer.PCL.Views.Assets;
 using BattleMech.PCL.Enums;
+using BattleMech.DataLayer.PCL.Models.Levels;
 
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -12,7 +13,13 @@ namespace BattleMech.PCL.ViewModels {
             _assets = new ObservableCollection<ActiveAssetsVIEW>();
 
             LevelItems = new ObservableCollection<LEVELITEM>();
+
+            Level = new Levels();
         }
+
+        private Levels _level;
+
+        public Levels Level {  get { return _level; } set { _level = value; OnPropertyChanged(); } }
 
         private ActiveAssetTypes _selectedAssetType;
 
@@ -71,6 +78,16 @@ namespace BattleMech.PCL.ViewModels {
             }
 
             Assets = tmp;
+
+            return true;
+        }
+
+        public async Task<bool> Save() {
+            var levelHandler = new LevelEditorHandler(Handler);
+
+            Level.Data = string.Join("|", LevelItems.Select(a => a.AssetID));
+
+            var result = await levelHandler.AddUpdateLevel(Level);
 
             return true;
         }

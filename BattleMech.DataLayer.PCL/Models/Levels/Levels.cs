@@ -10,7 +10,7 @@ namespace BattleMech.DataLayer.PCL.Models.Levels {
         public string Description { get; set; }
 
         [DataMember]
-        public string LevelData { get; set; }
+        public string Data { get; set; }
 
         [DataMember]
         public int NumDownloads { get; set; }

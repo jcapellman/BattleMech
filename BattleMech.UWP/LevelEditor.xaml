@@ -1,4 +1,4 @@
-﻿<Page
+﻿<local:BasePage
     x:Class="BattleMech.UWP.LevelEditor"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -84,15 +84,42 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
             <Grid Column="0" HorizontalAlignment="Left">
                 <Button Style="{StaticResource MainMenu}" Content="BACK TO MAIN MENU" x:Name="btnBack" Click="btnBack_OnClick" />
             </Grid>
             
-            <Grid Column="1" HorizontalAlignment="Right">
+            <Grid Column="1" HorizontalAlignment="Center">
+                <Button Style="{StaticResource MainMenu}" Content="LEVEL INFO" x:Name="btnLevelInfo" Click="btnLevelInfo_OnClick" />
+            </Grid>
+            
+            <Grid Column="2" HorizontalAlignment="Right">
                 <Button Style="{StaticResource MainMenu}" Content="SAVE/PUBLISH" x:Name="btnSavePublish" Click="btnSavePublish_OnClick" />
             </Grid>
         </Grid>
+        
+         <Popup x:Name="pLevelInfo">
+            <Grid x:Name="gLevelInfo" HorizontalAlignment="Center" VerticalAlignment="Center" Height="450" Width="600" Background="Black" BorderBrush="Yellow" BorderThickness="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="NAME" Grid.Row="0" />
+                <TextBox Grid.Row="1" FontSize="20" Text="{Binding Level.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,20,0" />
+                
+                <TextBlock Style="{StaticResource Label}" Margin="20,20,20,10" Text="DESCRIPTION" Grid.Row="2" />
+                <TextBox Grid.Row="3" FontSize="20" Margin="20,0,20,20" Height="200" Text="{Binding Level.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+
+                <Button x:Name="btnClose" Margin="20,0,20,10" Style="{StaticResource MainMenu}" Click="btnClose_Click" Content="CLOSE" Grid.Row="4" />
+            </Grid>
+        </Popup>
     </Grid>
-</Page>
+</local:BasePage>

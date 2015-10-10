@@ -1,24 +1,12 @@
-﻿using System;
-
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
 using BattleMech.UWP.PSI;
 
 namespace BattleMech.UWP {
-    public sealed partial class MainMenuPage : Page {
-        public async void ShowDialog(string messageText, string title = "Battlemech") {
-            var dialog = new MessageDialog(messageText, title);
-
-            await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => {
-                await dialog.ShowAsync();
-            });
-        }
+    public sealed partial class MainMenuPage : BasePage {
 
         private MainMenuModel viewModel => (MainMenuModel)DataContext;
 

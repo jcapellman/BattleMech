@@ -15,6 +15,16 @@ namespace BattleMech.WebAPI.Managers {
 
         internal CTI<bool> AddUpdateLevel(Levels level) {
             using (var levelEditorContext = new LevelEditorContext()) {
+                level.UserAuthorID = _authorizedUser.ID;
+
+                if (level.IsNew) {
+                    levelEditorContext.LevelsDS.Add(level);
+                } else {
+                    levelEditorContext.LevelsDS.Update(level);
+                }
+
+                levelEditorContext.SaveChanges();
+
                 return new CTI<bool>(true);
             }
         }
