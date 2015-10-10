@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using BattleMech.DataLayer.Contexts;
+using BattleMech.DataLayer.PCL.Models.Levels;
 using BattleMech.DataLayer.PCL.Views.Levels;
 using BattleMech.WebAPI.PCL.Transports.Common;
 using BattleMech.WebAPI.PCL.Transports.Levels;
@@ -11,6 +12,12 @@ using BattleMech.WebAPI.Transports.Internal;
 namespace BattleMech.WebAPI.Managers {
     public class LevelManager : BaseManager {
         public LevelManager(AuthorizedUser authorizedUser = null) : base(authorizedUser) { }
+
+        internal CTI<bool> AddUpdateLevel(Levels level) {
+            using (var levelEditorContext = new LevelEditorContext()) {
+                return new CTI<bool>(true);
+            }
+        }
 
         public CTI<List<LevelListingView>> GetLevelListing() {
             try {

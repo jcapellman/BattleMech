@@ -57,9 +57,7 @@
     <Compile Include="Transports\Common\CTI.cs" />
     <Compile Include="Transports\CharacterProfile\CharacterProfileResponseItem.cs" />
     <Compile Include="Transports\Internal\HandlerItem.cs" />
-    <Compile Include="Transports\Levels\LevelEditorRequestItem.cs" />
     <Compile Include="Transports\Levels\LevelEditorResponseItem.cs" />
-    <Compile Include="Transports\Levels\LevelItemRequestItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

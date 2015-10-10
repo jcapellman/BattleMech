@@ -49,6 +49,7 @@
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\GameMetrics\PlayerCharacterGames.cs" />
     <Compile Include="Models\Levels\AssetTypes.cs" />
+    <Compile Include="Models\Levels\Levels.cs" />
     <Compile Include="Models\Users\Tokens.cs" />
     <Compile Include="Models\Users\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
