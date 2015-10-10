@@ -13,7 +13,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Background/Blue_Stars.jpg
+#begin GFX_BACKGROUND/Blue_Stars.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -22,9 +22,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Background/Blue_Stars.jpg
+/build:GFX_BACKGROUND/Blue_Stars.jpg
 
-#begin Background/lightgreen_stars.jpg
+#begin GFX_BACKGROUND/lightgreen_stars.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -33,9 +33,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Background/lightgreen_stars.jpg
+/build:GFX_BACKGROUND/lightgreen_stars.jpg
 
-#begin Background/orange_stars.jpg
+#begin GFX_BACKGROUND/orange_stars.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -44,9 +44,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Background/orange_stars.jpg
+/build:GFX_BACKGROUND/orange_stars.jpg
 
-#begin Background/Red_Stars.jpg
+#begin GFX_BACKGROUND/Red_Stars.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -55,9 +55,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Background/Red_Stars.jpg
+/build:GFX_BACKGROUND/Red_Stars.jpg
 
-#begin Background/Yellow_Stars.jpg
+#begin GFX_BACKGROUND/Yellow_Stars.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -66,9 +66,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Background/Yellow_Stars.jpg
+/build:GFX_BACKGROUND/Yellow_Stars.jpg
 
-#begin Enemy/Gimp.png
+#begin GFX_ENEMY/Gimp.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -77,9 +77,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Enemy/Gimp.png
+/build:GFX_ENEMY/Gimp.png
 
-#begin Player/mech.png
+#begin GFX_PLAYER/mech.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -88,9 +88,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Player/mech.png
+/build:GFX_PLAYER/mech.png
 
-#begin Weapon/viper_blaster.png
+#begin GFX_WEAPON/viper_blaster.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -99,5 +99,5 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:TextureFormat=Color
-/build:Weapon/viper_blaster.png
+/build:GFX_WEAPON/viper_blaster.png
 

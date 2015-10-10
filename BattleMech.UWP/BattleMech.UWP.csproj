@@ -168,14 +168,14 @@
   <ItemGroup>
     <Content Include="Assets\Logo.png" />
     <Content Include="Assets\MechMainMenu.png" />
-    <Content Include="Content\Background\Blue_Stars.jpg" />
-    <Content Include="Content\Enemy\Gimp.png" />
-    <Content Include="Content\Background\lightgreen_stars.jpg" />
-    <Content Include="Content\Player\mech.png" />
-    <Content Include="Content\Background\orange_stars.jpg" />
-    <Content Include="Content\Background\Red_Stars.jpg" />
-    <Content Include="Content\Weapon\viper_blaster.png" />
-    <Content Include="Content\Background\Yellow_Stars.jpg" />
+    <Content Include="Content\GFX_BACKGROUND\Blue_Stars.jpg" />
+    <Content Include="Content\GFX_ENEMY\Gimp.png" />
+    <Content Include="Content\GFX_BACKGROUND\lightgreen_stars.jpg" />
+    <Content Include="Content\GFX_PLAYER\mech.png" />
+    <Content Include="Content\GFX_BACKGROUND\orange_stars.jpg" />
+    <Content Include="Content\GFX_BACKGROUND\Red_Stars.jpg" />
+    <Content Include="Content\GFX_WEAPON\viper_blaster.png" />
+    <Content Include="Content\GFX_BACKGROUND\Yellow_Stars.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
