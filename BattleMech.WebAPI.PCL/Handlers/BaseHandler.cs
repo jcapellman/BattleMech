@@ -67,8 +67,12 @@ namespace BattleMech.WebAPI.PCL.Handlers {
             return JsonConvert.DeserializeObject<K>(str);
         }
 
+        private string parseUrlArguments(string urlArguments) {
+            return string.IsNullOrEmpty(urlArguments) ? "" : $"?{urlArguments}";
+        }
+
         public async Task<T> GET<T>(string urlArguments) {
-            var str = await HC.GetStringAsync($"{BASEURL}{urlArguments}");
+            var str = await HC.GetStringAsync($"{BASEURL}{parseUrlArguments(urlArguments)}");
 
             return JsonConvert.DeserializeObject<T>(str);
         }

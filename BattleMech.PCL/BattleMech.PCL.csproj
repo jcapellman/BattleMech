@@ -60,6 +60,7 @@
     <Compile Include="Objects\Game\Enemy.cs" />
     <Compile Include="Objects\Game\Level.cs" />
     <Compile Include="Objects\Game\LevelObject.cs" />
+    <Compile Include="Objects\Game\LevelObjectLite.cs" />
     <Compile Include="Objects\Game\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSI\BaseLFSPSI.cs" />
