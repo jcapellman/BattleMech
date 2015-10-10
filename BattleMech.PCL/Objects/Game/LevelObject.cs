@@ -4,20 +4,11 @@ using BattleMech.PCL.Enums;
 
 namespace BattleMech.PCL.Objects.Game {
     [DataContract]
-    public class LevelObject {
-        [DataMember]
-        public int AssetID { set; get; }
-
-        [DataMember]
-        public string TextureName { get; set; }
-
-        [DataMember]
-        public int PositionX { get; set; }
-
-        [DataMember]
-        public int PositionY { get; set; }
-
+    public class LevelObject : LevelObjectLite {
         [DataMember]
         public ASSET_TYPES AssetType { get; set; }
+
+        [DataMember]
+        public string Filename { get; set; }
     }
 }
