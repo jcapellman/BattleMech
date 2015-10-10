@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using BattleMech.DataLayer.PCL.Views.Assets;
 using BattleMech.PCL.Enums;
+using BattleMech.PCL.Objects.Game;
 using BattleMech.PCL.PSI;
 using BattleMech.WebAPI.PCL.Handlers;
 
@@ -71,35 +74,33 @@ namespace BattleMech.PCL.ViewModels {
                 Username = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.USERNAME);
                 Password = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.PASSWORD);
 
-                var result = await AttemptLogin();
-
-                if (result) {
-                    return await LoadAssetData();
-                }
+                return await AttemptLogin();
             }
 
             return false;
         }
 
-        private async Task<bool> LoadAssetData() {
+        public async Task<List<ActiveAssetsVIEW>> LoadAssetData() {
             var assetHandler = new AssetHandler(Handler);
 
             var result = await assetHandler.GetAssets(_settingPSI.Get<int>(SETTING_OPTIONS.ASSET_VERSION));
 
             if (result.HasError) {
-                return false;
+                return null;
             }
 
             if (result.Value.ClientHasLatest) {
-                return true;
+                return null;
             }
-
+            
             _settingPSI.Write(SETTING_OPTIONS.ASSET_VERSION, result.Value.AssetVerion);
 
-            return await _lfsPSI.WriteFile(result.Value);
+            var fileWrite = await _lfsPSI.WriteFile(result.Value);
+
+            return result.Value.Assets;
         }
 
-        public string Token { get; set; }
+        public string Token { get { return _token; } set { _token = value; OnPropertyChanged(); } }
 
         private bool checkForm() {
             return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
@@ -112,7 +113,7 @@ namespace BattleMech.PCL.ViewModels {
         public async Task<bool> AttemptLogin() {
             var result = await AttemptLogin(Username, Password);
 
-            if (result != null && !string.IsNullOrEmpty(result.Token)) {
+            if (!string.IsNullOrEmpty(result?.Token)) {
                 IsLoggedIn = true;
                 LoginButtonText = "LOGOUT";
                 Token = result.Token;
@@ -132,7 +133,7 @@ namespace BattleMech.PCL.ViewModels {
 
             CreateAccountEnabled = !IsLoggedIn;
 
-            return result != null && !string.IsNullOrEmpty(result.Token);
+            return !string.IsNullOrEmpty(result?.Token);
         }
 
         public void Logout() {
