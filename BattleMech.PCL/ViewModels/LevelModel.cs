@@ -64,7 +64,7 @@ namespace BattleMech.PCL.ViewModels {
 
                 var nItem = new LevelObject {
                     AssetType = (ASSET_TYPES) asset.AssetTypeID,
-                    Filename = asset.Filename,
+                    Filename = asset.Filename.Replace("/Content/", ""),
                     PositionX = item.PositionX,
                     PositionY = item.PositionY,
                     AssetID = asset.ID
