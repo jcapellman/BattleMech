@@ -6,13 +6,15 @@ using BattleMech.DataLayer.PCL.Models.Levels;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using BattleMech.PCL.Objects.Game;
+using Newtonsoft.Json;
 
 namespace BattleMech.PCL.ViewModels {
     public class LevelEditorModel : BaseViewModel {
         public LevelEditorModel(string token) : base(token) {
             _assets = new ObservableCollection<ActiveAssetsVIEW>();
 
-            LevelItems = new ObservableCollection<LEVELITEM>();
+            LevelItems = new ObservableCollection<LevelObject>();
 
             Level = new Levels();
         }
@@ -39,23 +41,17 @@ namespace BattleMech.PCL.ViewModels {
             get { return new ObservableCollection<ActiveAssetsVIEW>(_assets.Where(a => a.AssetTypeID == SelectedAssetType.ID)); }
             set { _assets = value; OnPropertyChanged(); }
         }
+        
+        private ObservableCollection<LevelObject> _levelItems;
 
-        public struct LEVELITEM {
-            public int AssetID { get; set; }
-
-            public string Filename { get; set; }
-        }
-
-        private ObservableCollection<LEVELITEM> _levelItems;
-
-        public ObservableCollection<LEVELITEM> LevelItems { get { return _levelItems; } set { _levelItems = value; OnPropertyChanged(); } }
+        public ObservableCollection<LevelObject> LevelItems { get { return _levelItems; } set { _levelItems = value; OnPropertyChanged(); } }
 
         private ActiveAssetsVIEW _selectedAsset;
 
         public ActiveAssetsVIEW SelectedAsset {  get { return _selectedAsset; } set { _selectedAsset = value; OnPropertyChanged(); } }
 
         public void AddItem() {
-            LevelItems.Add(new LEVELITEM { AssetID = SelectedAsset.ID, Filename = SelectedAsset.Filename });
+            LevelItems.Add(new LevelObject { AssetID = SelectedAsset.ID, Filename = SelectedAsset.Filename, PositionX = LevelItems.Count() });
         }
 
         public async Task<bool> LoadData() {
@@ -82,10 +78,18 @@ namespace BattleMech.PCL.ViewModels {
             return true;
         }
 
+        private string LevelItemsToJSON() {
+            var cList =
+                LevelItems.Select(
+                    a => new LevelObjectLite {AssetID = a.AssetID, PositionX = a.PositionX, PositionY = a.PositionY});
+
+            return JsonConvert.SerializeObject(cList);
+        }
+
         public async Task<bool> Save() {
             var levelHandler = new LevelEditorHandler(Handler);
 
-            Level.Data = string.Join("|", LevelItems.Select(a => a.AssetID));
+            Level.Data = LevelItemsToJSON();
 
             var result = await levelHandler.AddUpdateLevel(Level);
 
