@@ -74,18 +74,19 @@ namespace BattleMech.PCL.Managers.Game {
         /// <typeparam name="T">The object type to create</typeparam>
         /// <param name="textureName">The texture graphic to be used for the interable object</param>
         /// <returns></returns>
-        public BaseTexturable AddTextureItem<T>(string textureName) where T : BaseTexturable {
+        public BaseTexturable AddTextureItem<T>(string textureName, float? positionX = null) where T : BaseTexturable {
             //get an available renderable of the type T
             var item = GetRenderable<T>().FirstOrDefault() as BaseTexturable;
 
             //create a new instance if there was not one available
-            if (item == null){
+            if (item == null || typeof(T) == typeof(Background)){
                 item = (T)Activator.CreateInstance(typeof(T), _content.Load<Texture2D>(textureName));
 
-                if (item.IsFullScreen){
-                    item.PositionX = (float)_windowWidth;
+                if (item.IsFullScreen) {
+                    item.PositionX = positionX ?? _windowWidth;
                     item.PositionY = (float)_windowHeight;
                 }
+                
                 item.CheckOnScreen = IsOnScreen;
                 AddItem(item);
             }else{

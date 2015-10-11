@@ -43,7 +43,7 @@ namespace BattleMech.UWP {
             foreach (var levelObjects in App.CurrentLevel.Objects) {
                 switch (levelObjects.AssetType) {
                     case ASSET_TYPES.GFX_BACKGROUND:
-                        _tm.AddTextureItem<Background>(levelObjects.Filename);
+                        _tm.AddTextureItem<Background>(levelObjects.Filename, levelObjects.PositionX);
                         break;
                 }
             }
@@ -100,12 +100,12 @@ namespace BattleMech.UWP {
 
             _spriteBatch.Begin();
 
-            foreach (var texturable in _tm.Items.Where(a => a.IsActive)) {
+            foreach (var texturable in _tm.Items.Where(a => a.IsActive).OrderBy(b => b.ItemType)) {
                 switch (texturable.ItemType) {
                     case TEXTURABLE_ITEM_TYPES.TEXT:
                         var item = (Text) texturable;
 
-                        _spriteBatch.DrawString(item.sfMain, item.RenderText, item.Position, item.FontColor, 0.0f, new Vector2(0,0), new Vector2(1.0f), SpriteEffects.None, 0.0f);
+                        _spriteBatch.DrawString(item.sfMain, item.RenderText, item.Position, item.FontColor);
                         break;
                     default:
                         _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
