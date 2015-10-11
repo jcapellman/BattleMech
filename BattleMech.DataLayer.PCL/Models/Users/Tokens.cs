@@ -11,5 +11,8 @@ namespace BattleMech.DataLayer.PCL.Models.Users {
 
         [DataMember]
         public int UserID { get; set; }
+
+        [DataMember]
+        public int CharacterID { get; set; }
     }
 }

@@ -1,8 +1,12 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
+using Windows.UI.Xaml.Controls;
+using BattleMech.DataLayer.PCL.Models.GameMetrics;
 using BattleMech.PCL.Enums;
 using BattleMech.PCL.Managers.Game;
 using BattleMech.PCL.Objects.Game;
-
+using BattleMech.WebAPI.PCL.Handlers;
+using BattleMech.WebAPI.PCL.Transports.Internal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,8 +20,9 @@ namespace BattleMech.UWP {
 
         public MainGame() {
             _graphics = new GraphicsDeviceManager(this);
-            
+           
             Content.RootDirectory = "Content";
+            
         }
         
         protected override void LoadContent() {
@@ -37,15 +42,53 @@ namespace BattleMech.UWP {
             //add the player's selected character to the game
             _tm.AddTextureItem<Player>(App.PlayerAsset.Filename);
         }
-
-        protected override void UnloadContent() {
-            Content.Unload();
-        }
         
-        protected override void Update(GameTime gameTime) {
-            _tm.Update(gameTime);
+        private async void recordGameMetric() {
+            var gmHandler = new GameMetricHandler(new HandlerItem { Token = App.Token, WEBAPIUrl = "http://battlemech.azurewebsites.net/api/" });
 
-            base.Update(gameTime);
+            
+            
+            var result = await gmHandler.AddGameMetric(_tm.Metrics);
+
+            if (result.HasError)
+            {
+                Debug.WriteLine(result.Exception);
+            }
+        }
+
+        private bool _exiting = false;
+
+        protected override void UnloadContent()
+        {
+            this.Dispose();
+            base.UnloadContent();
+        }
+
+        protected override void Update(GameTime gameTime) {
+            if (_exiting)
+            {
+                SuppressDraw();
+                return;
+            }
+
+            var isNotDone =_tm.Update(gameTime);
+
+            if (isNotDone) {
+                base.Update(gameTime);
+
+                return;
+            }
+
+            _exiting = true;
+            SuppressDraw();
+
+            recordGameMetric();
+            
+            var frame = new Frame();
+            frame.Navigate(typeof(MainMenuPage));
+
+            Windows.UI.Xaml.Window.Current.Content = frame;
+            Windows.UI.Xaml.Window.Current.Activate();
         }
 
         protected override void Draw(GameTime gameTime) {
@@ -59,7 +102,7 @@ namespace BattleMech.UWP {
             }
 
             _spriteBatch.End();
-
+           
             base.Draw(gameTime);
         }
     }

@@ -24,12 +24,12 @@ namespace BattleMech.DataLayer.Contexts {
             var modifiedGameMetrics = ChangeTracker.Entries<PlayerCharacterGames>().Where(a => a.State == EntityState.Added || a.State == EntityState.Modified);
 
             foreach (var item in modifiedGameMetrics) {
-                if (item.State == EntityState.Added) {
-                    item.Property("Created").CurrentValue = DateTimeOffset.Now;
-                    item.Property("Active").CurrentValue = true;
+                if (item.Entity.IsNew) {
+                    item.Property<DateTimeOffset>("Created").CurrentValue = DateTimeOffset.Now;
+                    item.Property<bool>("Active").CurrentValue = true;
                 }
 
-                item.Property("Modified").CurrentValue = DateTimeOffset.Now;
+                item.Property<DateTimeOffset>("Modified").CurrentValue = DateTimeOffset.Now;
             }
 
             return base.SaveChanges();

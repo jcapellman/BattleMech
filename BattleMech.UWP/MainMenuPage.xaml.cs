@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
@@ -28,7 +29,9 @@ namespace BattleMech.UWP {
             viewModel.Username = string.Empty;
             viewModel.Password = string.Empty;
 
-            App.Assets = await viewModel.LoadAssetData();
+            if (App.Assets == null) {
+                App.Assets = await viewModel.LoadAssetData();
+            }
 
             App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == result.PlayerAssetID);
 
@@ -86,7 +89,9 @@ namespace BattleMech.UWP {
 
             pLogin.IsOpen = false;
 
-            App.Assets = await viewModel.LoadAssetData();
+            if (App.Assets == null) {
+                App.Assets = await viewModel.LoadAssetData();
+            }
 
             App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == result.PlayerAssetID);
         }
@@ -127,7 +132,9 @@ namespace BattleMech.UWP {
 
             App.Token = loginResult.Token;
 
-            App.Assets = await viewModel.LoadAssetData();
+            if (App.Assets == null) {
+                App.Assets = await viewModel.LoadAssetData();
+            }
 
             App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == loginResult.PlayerAssetID);
 

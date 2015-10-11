@@ -72,7 +72,7 @@ namespace BattleMech.PCL.ViewModels {
             IsLoggedIn = !string.IsNullOrEmpty(_token);
             LoginButtonText = (IsLoggedIn ? "LOGOUT" : "LOGIN");
             CreateAccountEnabled = !IsLoggedIn;
-
+            
             if (_settingPSI.Get<bool>(Enums.SETTING_OPTIONS.REMEMBER_LOGIN)) {
                 Username = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.USERNAME);
                 Password = _settingPSI.Get<string>(Enums.SETTING_OPTIONS.PASSWORD);
@@ -97,7 +97,7 @@ namespace BattleMech.PCL.ViewModels {
             }
             
             _settingPSI.Write(SETTING_OPTIONS.ASSET_VERSION, result.Value.AssetVerion);
-
+            
             var fileWrite = await _lfsPSI.WriteFile(result.Value);
 
             for (var x = 0; x < result.Value.Assets.Count; x++) {

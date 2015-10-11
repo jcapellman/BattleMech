@@ -17,7 +17,7 @@ namespace BattleMech.UWP.PSI {
 
             var objInBytes = GetBytesFromT(obj);
 
-            using (var stream = await storageFolder.OpenStreamForWriteAsync(typeof(T).Name, CreationCollisionOption.ReplaceExisting)) {
+            using (var stream = await storageFolder.OpenStreamForWriteAsync(typeof(T).Name, CreationCollisionOption.OpenIfExists)) {
                 stream.Write(objInBytes, 0, objInBytes.Length);
             }
 
@@ -36,7 +36,7 @@ namespace BattleMech.UWP.PSI {
             }
 
             var buffer = await FileIO.ReadBufferAsync(file);
-
+            
             return new CTI<T>(GetObjectFromBytes<T>(buffer.ToArray()));
         }
     }

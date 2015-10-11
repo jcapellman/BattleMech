@@ -44,12 +44,12 @@ namespace BattleMech.PCL.Managers.Game {
         /// Handles actually update the items
         /// </summary>
         /// <param name="gameTime"></param>
-        public virtual void Update(GameTime gameTime)
-        {
-            foreach (var item in Items)
-            {
+        public virtual bool Update(GameTime gameTime) {
+            foreach (var item in Items) {
                 if(item.IsActive) item.Update(gameTime);
             }
+
+            return true;
         }
 
         public void UpdateItem(T item) {

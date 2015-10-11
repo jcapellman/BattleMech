@@ -16,10 +16,11 @@ namespace BattleMech.WebAPI.Managers {
 
                 using (var db = new GameMetricContext()) {
                     var result = new CharacterProfileResponseItem {
-                        GameHistory = db.GameListingViews.Where(a => a.UserID == selectedUserID).ToList(),
-                        Character = db.CharacterViews.FirstOrDefault(a => a.UserID == selectedUserID)
+                        GameHistory = db.GameListingViews.Where(a => a.UserID == selectedUserID).ToList()
                     };
-                    
+
+                    result.Character = db.CharacterViews.Where(a => a.UserID == selectedUserID).ToList().FirstOrDefault();
+
                     return new CTI<CharacterProfileResponseItem>(result);
                 }
             } catch (Exception ex) {

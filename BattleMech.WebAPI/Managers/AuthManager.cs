@@ -11,27 +11,29 @@ namespace BattleMech.WebAPI.Managers {
     public class AuthManager : BaseManager {
         public AuthResponseItem GenerateToken(AuthRequestItem requestItem) {
             using (var uFactory = new UserContext()) {
-                using (var md5Hash = MD5.Create()) {
-                    var hash = getMd5Hash(md5Hash, requestItem.Username + requestItem.Password);
+                using (var assetFactory = new AssetContext()) {
+                    using (var md5Hash = MD5.Create()) {
+                        var hash = getMd5Hash(md5Hash, requestItem.Username + requestItem.Password);
 
-                    var match = uFactory.UsersDS.FirstOrDefault(a => a.EmailAddress == requestItem.Username && a.Password == requestItem.Password);
+                        var match = uFactory.UsersDS.FirstOrDefault(a => a.EmailAddress == requestItem.Username && a.Password == requestItem.Password);
 
-                    if (match == null) {
-                        return null;
-                    }
+                        if (match == null) {
+                            return null;
+                        }
 
-                    var tokenExist = uFactory.TokensDS.Any(a => a.HASH == hash);
+                        var characterAsset = assetFactory.CharacterAssetsVIEWDS.FirstOrDefault(a => a.UserID == match.ID);
 
-                    if (!tokenExist) {
-                        var token = new Tokens { UserID = match.ID, HASH = hash };
+                        var tokenExist = uFactory.TokensDS.Any(a => a.HASH == hash);
 
-                        uFactory.TokensDS.Add(token);
+                        if (!tokenExist) {
+                            var token = new Tokens { UserID = match.ID, HASH = hash, CharacterID = characterAsset.ID };
 
-                        uFactory.SaveChanges();
-                    }
+                            uFactory.TokensDS.Add(token);
 
-                    using (var assetFactory = new AssetContext()) {
-                        return match == null ? null : new AuthResponseItem {Token = hash, PlayerAssetID = assetFactory.CharacterAssetsVIEWDS.FirstOrDefault(a => a.UserID == match.ID).AssetID };
+                            uFactory.SaveChanges();
+                        }
+                        
+                        return match == null ? null : new AuthResponseItem {Token = hash, PlayerAssetID = characterAsset.AssetID };
                     }
                 }
             }
@@ -61,7 +63,7 @@ namespace BattleMech.WebAPI.Managers {
                     return null;
                 }
 
-                return new AuthorizedUser { ID = result.UserID };
+                return new AuthorizedUser { ID = result.UserID, CharacterID = result.CharacterID };
             }
         }
     }

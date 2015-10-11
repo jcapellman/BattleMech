@@ -12,6 +12,7 @@ using BattleMech.PCL.Objects.Game;
 using Microsoft.Xna.Framework.Input;
 using BattleMech.PCL.Objects.Game.Actors;
 using System.Diagnostics;
+using BattleMech.DataLayer.PCL.Models.GameMetrics;
 
 namespace BattleMech.PCL.Managers.Game {
     public class TexturableManager : BaseGameManager<BaseTexturable> {
@@ -37,11 +38,22 @@ namespace BattleMech.PCL.Managers.Game {
         public float waveTime;
         public float nextWave;
 
+        public PlayerCharacterGames Metrics;
+
         public TexturableManager(ContentManager content) : base(content) { }
 
         public TexturableManager(ContentManager content, int windowWidth, int windowHeight) : this(content) {
             _windowWidth = windowWidth;
             _windowHeight = windowHeight;
+
+            Metrics = new PlayerCharacterGames {
+                LevelID = 6,
+                EnemiesDestroyed = 0,
+                ExperienceGarnered = 0,
+                ShotsFired = 0,
+                TimesDied = 0,
+                TotalEnemiesFought = 0
+            };
         }
 
         /// <summary>
@@ -85,7 +97,7 @@ namespace BattleMech.PCL.Managers.Game {
         /// Prepares game texturables to be updated by game manager
         /// </summary>
         /// <param name="gameTime"></param>
-        public override void Update(GameTime gameTime)
+        public override bool Update(GameTime gameTime)
         {
             var keys = controller.GetInput();
             Player player = GetItemByEnum(TEXTURABLE_ITEM_TYPES.PLAYER) as Player;
@@ -110,7 +122,11 @@ namespace BattleMech.PCL.Managers.Game {
                         BaseTexturable bullet = AddTextureItem<GenericBullet>("GFX_WEAPON/viper_blaster.png");
                         bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
                         bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
+
+                        Metrics.ShotsFired++;
                         break;
+                    case Keys.Escape:
+                        return false;
                 }
             }
 
@@ -127,6 +143,8 @@ namespace BattleMech.PCL.Managers.Game {
                 nextWave = WAVE_INTERVAL;
 
                 Debug.WriteLine($"Created new enemy: id:{enemy.ID} | x: |{enemy.PositionX} | y:{enemy.PositionY}");
+
+                Metrics.TotalEnemiesFought++;
             }
 
             //prepare for collision detection between active enemies and projectiles
@@ -146,12 +164,16 @@ namespace BattleMech.PCL.Managers.Game {
                     {
                         projectile.IsActive = false;
                         enemy.IsActive = false;
+
+                        Metrics.EnemiesDestroyed++;
+                        Metrics.ExperienceGarnered += 100;
                     }
                 }
             }
 
             base.Update(gameTime);
 
+            return true;
             //Debug.WriteLine($"DEBUG: Total Enmies: {enemies.Count()} | Total Projectiles: {projectiles.Count()}");
         }
 
