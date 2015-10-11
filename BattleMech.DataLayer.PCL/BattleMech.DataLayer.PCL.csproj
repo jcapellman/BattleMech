@@ -55,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Assets\ActiveAssetsVIEW.cs" />
     <Compile Include="Views\Assets\ActiveAssetTypes.cs" />
+    <Compile Include="Views\Assets\ActiveCharacterAssetsVIEW.cs" />
     <Compile Include="Views\GameMetrics\PlayerCharacterView.cs" />
     <Compile Include="Views\GameMetrics\PlayerGameListingView.cs" />
     <Compile Include="Views\Leaderboard\LeaderboardView.cs" />
