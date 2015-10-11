@@ -112,3 +112,9 @@
 /processorParam:TextureFormat=Color
 /build:GFX_EFFECTS/green_explosion.png
 
+#begin GFX_FONTS/MainFont.spriteFont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:GFX_FONTS/MainFont.spriteFont
+

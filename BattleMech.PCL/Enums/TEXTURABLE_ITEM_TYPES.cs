@@ -3,6 +3,7 @@
         PLAYER,
         BACKGROUND,
         ENEMY,
-        PROJECTILE
+        PROJECTILE,
+        TEXT
     }
 }

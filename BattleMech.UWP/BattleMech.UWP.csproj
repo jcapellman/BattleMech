@@ -96,6 +96,7 @@
     <Content Include="Fonts\Font.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Content\GFX_FONTS\MainFont.spriteFont" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

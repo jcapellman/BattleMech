@@ -24,13 +24,22 @@ namespace BattleMech.UWP {
             Content.RootDirectory = "Content";
             
         }
-        
+
+        private void AddHUD()
+        {
+            _tm.AddTextItem<Text>("GFX_FONTS/MainFont", "ENEMIES DESTROYED: 0", Color.White, new Vector2(20, 20));
+            _tm.AddTextItem<Text>("GFX_FONTS/MainFont", "SCORE: 0", Color.White, new Vector2(500, 20));
+
+        }
+
         protected override void LoadContent() {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
             _tm.controller = new PCInputController();
-            
+
+            AddHUD();
+
             foreach (var levelObjects in App.CurrentLevel.Objects) {
                 switch (levelObjects.AssetType) {
                     case ASSET_TYPES.GFX_BACKGROUND:
@@ -45,15 +54,8 @@ namespace BattleMech.UWP {
         
         private async void recordGameMetric() {
             var gmHandler = new GameMetricHandler(new HandlerItem { Token = App.Token, WEBAPIUrl = "http://battlemech.azurewebsites.net/api/" });
-
             
-            
-            var result = await gmHandler.AddGameMetric(_tm.Metrics);
-
-            if (result.HasError)
-            {
-                Debug.WriteLine(result.Exception);
-            }
+            await gmHandler.AddGameMetric(_tm.Metrics);
         }
 
         private bool _exiting = false;
@@ -96,9 +98,17 @@ namespace BattleMech.UWP {
 
             _spriteBatch.Begin();
 
-            foreach (var texturable in _tm.Items) {
+            foreach (var texturable in _tm.Items.Where(a => a.IsActive)) {
+                switch (texturable.ItemType) {
+                    case TEXTURABLE_ITEM_TYPES.TEXT:
+                        var item = (Text) texturable;
 
-                if(texturable.IsActive) _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
+                        _spriteBatch.DrawString(item.sfMain, item.RenderText, item.Position, item.FontColor, 0.0f, new Vector2(0,0), new Vector2(1.0f), SpriteEffects.None, 0.0f);
+                        break;
+                    default:
+                        _spriteBatch.Draw(texturable.Texture, texturable.GetRectange(), Color.White);
+                        break;
+                }
             }
 
             _spriteBatch.End();

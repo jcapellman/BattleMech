@@ -56,6 +56,18 @@ namespace BattleMech.PCL.Managers.Game {
             };
         }
 
+        public BaseTexturable AddTextItem<T>(string fontName, string renderText, Color fontColor, Vector2 position) where T : Text {
+            var item = new Text(null, TEXTURABLE_ITEM_TYPES.TEXT);
+
+            var font = _content.Load<SpriteFont>(fontName);
+
+            item.Init(font, 14.0, renderText, fontColor, position);
+
+            AddItem(item);
+
+            return item;
+        }
+
         /// <summary>
         /// Creates a new texture item that is interactable within the game world. Calls the BaseManager's GEt Renderable that recycles unused objects.
         /// </summary>
@@ -129,7 +141,7 @@ namespace BattleMech.PCL.Managers.Game {
                         return false;
                 }
             }
-
+            
             waveTime += gameTime.ElapsedGameTime.Milliseconds;
             if (waveTime >= nextWave)
             {
@@ -168,6 +180,18 @@ namespace BattleMech.PCL.Managers.Game {
                         Metrics.EnemiesDestroyed++;
                         Metrics.ExperienceGarnered += 100;
                     }
+                }
+            }
+
+            var text = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.TEXT);
+
+            foreach (var item in text) {
+                var tItem = (Text) item;
+
+                if (tItem.RenderText.StartsWith("ENEMIES")) {
+                    tItem.UpdateText($"ENEMIES DESTROYED: {Metrics.EnemiesDestroyed}");
+                } else if (tItem.RenderText.StartsWith("SCORE")) {
+                    tItem.UpdateText($"SCORE: {Metrics.EnemiesDestroyed * 100}");
                 }
             }
 
