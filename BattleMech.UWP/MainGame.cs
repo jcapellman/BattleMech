@@ -1,4 +1,5 @@
-﻿using BattleMech.PCL.Enums;
+﻿using System.Linq;
+using BattleMech.PCL.Enums;
 using BattleMech.PCL.Managers.Game;
 using BattleMech.PCL.Objects.Game;
 
@@ -34,12 +35,7 @@ namespace BattleMech.UWP {
             }
 
             //add the player's selected character to the game
-            if(App.PlayerInfo.Character != null){
-                _tm.AddTextureItem<Player>(App.PlayerInfo.Character.Name);
-            }else{
-                _tm.AddTextureItem<Player>("GFX_PLAYER/mech.png");
-            }
-            
+            _tm.AddTextureItem<Player>(App.PlayerAsset.Filename);
         }
 
         protected override void UnloadContent() {
