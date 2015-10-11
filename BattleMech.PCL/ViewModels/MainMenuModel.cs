@@ -6,6 +6,7 @@ using BattleMech.PCL.Enums;
 using BattleMech.PCL.Objects.Game;
 using BattleMech.PCL.PSI;
 using BattleMech.WebAPI.PCL.Handlers;
+using BattleMech.WebAPI.PCL.Transports.Auth;
 using BattleMech.WebAPI.PCL.Transports.CharacterProfile;
 using BattleMech.WebAPI.PCL.Transports.Common;
 
@@ -67,7 +68,7 @@ namespace BattleMech.PCL.ViewModels {
 
         public string caLastName { get { return _caLastName; } set { _caLastName = value; OnPropertyChanged(); CreateEnabled = checkCreateForm(); } }
 
-        public async Task<bool> LoadData() {
+        public async Task<AuthResponseItem> LoadData() {
             IsLoggedIn = !string.IsNullOrEmpty(_token);
             LoginButtonText = (IsLoggedIn ? "LOGOUT" : "LOGIN");
             CreateAccountEnabled = !IsLoggedIn;
@@ -79,7 +80,7 @@ namespace BattleMech.PCL.ViewModels {
                 return await AttemptLogin();
             }
 
-            return false;
+            return null;
         }
 
         public async Task<List<ActiveAssetsVIEW>> LoadAssetData() {
@@ -108,7 +109,7 @@ namespace BattleMech.PCL.ViewModels {
             return result.Value.Assets;
         }
 
-        public string Token { get { return _token; } set { _token = value; OnPropertyChanged(); } }
+        private string Token { get { return _token; } set { _token = value; OnPropertyChanged(); } }
 
         private bool checkForm() {
             return !string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password);
@@ -118,7 +119,7 @@ namespace BattleMech.PCL.ViewModels {
             return !string.IsNullOrEmpty(caUsername) && !string.IsNullOrEmpty(caPassword) && !string.IsNullOrEmpty(caFirstName) && !string.IsNullOrEmpty(caLastName);
         }
 
-        public async Task<bool> AttemptLogin() {
+        public async Task<AuthResponseItem> AttemptLogin() {
             var result = await AttemptLogin(Username, Password);
 
             if (!string.IsNullOrEmpty(result?.Token)) {
@@ -131,7 +132,6 @@ namespace BattleMech.PCL.ViewModels {
                     _settingPSI.Write(Enums.SETTING_OPTIONS.PASSWORD, Password);
                     _settingPSI.Write(Enums.SETTING_OPTIONS.REMEMBER_LOGIN, RememberLogin);
                 }
-                
             } else {
                 LoginButtonText = "LOGIN";
 
@@ -142,7 +142,7 @@ namespace BattleMech.PCL.ViewModels {
 
             CreateAccountEnabled = !IsLoggedIn;
 
-            return !string.IsNullOrEmpty(result?.Token);
+            return result;
         }
 
         public async Task<CTI<CharacterProfileResponseItem>> GetCharacterInfo()

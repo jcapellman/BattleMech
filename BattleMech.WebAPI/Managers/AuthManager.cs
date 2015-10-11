@@ -11,7 +11,7 @@ namespace BattleMech.WebAPI.Managers {
     public class AuthManager : BaseManager {
         public AuthResponseItem GenerateToken(AuthRequestItem requestItem) {
             using (var uFactory = new UserContext()) {
-                using (MD5 md5Hash = MD5.Create()) {
+                using (var md5Hash = MD5.Create()) {
                     var hash = getMd5Hash(md5Hash, requestItem.Username + requestItem.Password);
 
                     var match = uFactory.UsersDS.FirstOrDefault(a => a.EmailAddress == requestItem.Username && a.Password == requestItem.Password);
@@ -30,7 +30,9 @@ namespace BattleMech.WebAPI.Managers {
                         uFactory.SaveChanges();
                     }
 
-                    return match == null ? null : new AuthResponseItem { Token = hash };
+                    using (var assetFactory = new AssetContext()) {
+                        return match == null ? null : new AuthResponseItem {Token = hash, PlayerAssetID = assetFactory.CharacterAssetsVIEWDS.FirstOrDefault(a => a.UserID == match.ID).AssetID };
+                    }
                 }
             }
         }

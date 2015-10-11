@@ -6,14 +6,23 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+
 using BattleMech.DataLayer.PCL.Views.Assets;
 using BattleMech.PCL.Objects.Game;
-using BattleMech.WebAPI.PCL.Transports.CharacterProfile;
 
 namespace BattleMech.UWP {
     sealed partial class App {
+        private static ActiveAssetsVIEW _playerAsset;
 
-        public static CharacterProfileResponseItem PlayerInfo;
+        public static ActiveAssetsVIEW PlayerAsset {
+            get { return _playerAsset ?? (_playerAsset = new ActiveAssetsVIEW {Filename = "GFX_PLAYER/Mech.png"}); }
+
+            set {
+                _playerAsset = value;
+
+                _playerAsset.Filename = _playerAsset.Filename.Replace("/Content/", "");
+            }
+        }
 
         public static GamePage Game;
 

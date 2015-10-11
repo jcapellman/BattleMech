@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Linq;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
@@ -18,25 +19,20 @@ namespace BattleMech.UWP {
         protected override async void OnNavigatedTo(NavigationEventArgs e) {
             var result = await viewModel.LoadData();
 
-            if (!result) {
+            if (result == null) {
                 return;
             }
 
-            App.Token = viewModel.Token;
-
+            App.Token = result.Token;
+            
             viewModel.Username = string.Empty;
             viewModel.Password = string.Empty;
 
             App.Assets = await viewModel.LoadAssetData();
 
-            pLogin.IsOpen = false;
+            App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == result.PlayerAssetID);
 
-            //get the player's info if we were auto logged in
-            if (viewModel.IsLoggedIn)
-            {
-                var characterResult = await viewModel.GetCharacterInfo();
-                App.PlayerInfo = characterResult.Value;
-            }
+            pLogin.IsOpen = false;
         }
 
         private async void btnNewGame_OnClick(object sender, RoutedEventArgs e) {
@@ -77,22 +73,22 @@ namespace BattleMech.UWP {
         private async void btnLogin_Click(object sender, RoutedEventArgs e) {
             var result = await viewModel.AttemptLogin();
 
-            if (!result) {
+            if (result == null) {
                 ShowDialog("Invalid email or passsword");
 
                 return;
             }
 
-            App.Token = viewModel.Token;
-
+            App.Token = result.Token;
+            
             viewModel.Username = string.Empty;
             viewModel.Password = string.Empty;
 
             pLogin.IsOpen = false;
-            
-            //get the player's info for selected character, stats, etc.
-            var characterResult = await viewModel.GetCharacterInfo();
-            App.PlayerInfo = characterResult.Value;
+
+            App.Assets = await viewModel.LoadAssetData();
+
+            App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == result.PlayerAssetID);
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e) {
@@ -127,9 +123,13 @@ namespace BattleMech.UWP {
             viewModel.Username = viewModel.caUsername;
             viewModel.Password = viewModel.caPassword;
 
-            result = await viewModel.AttemptLogin();
+            var loginResult = await viewModel.AttemptLogin();
 
-            App.Token = viewModel.Token;
+            App.Token = loginResult.Token;
+
+            App.Assets = await viewModel.LoadAssetData();
+
+            App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == loginResult.PlayerAssetID);
 
             pCreateAccount.IsOpen = false;
 
