@@ -85,7 +85,9 @@ namespace BattleMech.UWP {
             SuppressDraw();
 
             recordGameMetric();
-            
+
+            IsMouseVisible = true;
+
             var frame = new Frame();
             frame.Navigate(typeof(MainMenuPage));
 
