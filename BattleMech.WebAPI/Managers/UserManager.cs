@@ -21,6 +21,23 @@ namespace BattleMech.WebAPI.Managers {
 
                     var result = db.SaveChanges();
 
+                    if (result == 0) {
+                        throw new Exception("Could not create account");
+                    }
+                    
+                    var playerCharacter = new PlayerCharacters();
+
+                    playerCharacter.AssetID = 7;
+                    playerCharacter.ClassTypeID = 1;
+                    playerCharacter.Experience = 0;
+                    playerCharacter.LevelNumber = 1;
+                    playerCharacter.Name = "N3WB";
+                    playerCharacter.UserID = user.ID;
+
+                    db.PlayerCharactersDS.Add(playerCharacter);
+
+                    result = db.SaveChanges();
+
                     return new CTI<bool>(result > 0);
                 }
             } catch (Exception ex) {

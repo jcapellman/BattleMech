@@ -174,9 +174,6 @@ namespace BattleMech.PCL.ViewModels {
             var user = new DataLayer.PCL.Models.Users.Users {
                 EmailAddress = caUsername,
                 Password = caPassword,
-                Active = true,
-                Created = DateTimeOffset.Now,
-                Modified = DateTimeOffset.Now,
                 FirstName = caFirstName,
                 LastName = caLastName,
                 Activated = true
