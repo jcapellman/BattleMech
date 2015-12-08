@@ -13,11 +13,15 @@ using Microsoft.Xna.Framework.Input;
 using BattleMech.PCL.Objects.Game.Actors;
 using System.Diagnostics;
 using BattleMech.DataLayer.PCL.Models.GameMetrics;
+using BattleMech.PCL.Interfaces;
+using BattleMech.DataLayer.PCL.Views.Assets;
 
 namespace BattleMech.PCL.Managers.Game {
     public class TexturableManager : BaseGameManager<BaseTexturable> {
         private readonly float _windowHeight;
         private readonly float _windowWidth;
+
+        public IClientStage stage;
 
         #region Helper Methods
 
@@ -42,9 +46,10 @@ namespace BattleMech.PCL.Managers.Game {
 
         public TexturableManager(ContentManager content) : base(content) { }
 
-        public TexturableManager(ContentManager content, int windowWidth, int windowHeight) : this(content) {
+        public TexturableManager(IClientStage stage, ContentManager content, int windowWidth, int windowHeight) : this(content) {
             _windowWidth = windowWidth;
             _windowHeight = windowHeight;
+            this.stage = stage;
 
             Metrics = new PlayerCharacterGames {
                 LevelID = 6,
@@ -74,26 +79,60 @@ namespace BattleMech.PCL.Managers.Game {
         /// <typeparam name="T">The object type to create</typeparam>
         /// <param name="textureName">The texture graphic to be used for the interable object</param>
         /// <returns></returns>
-        public BaseTexturable AddTextureItem<T>(string textureName, float? positionX = null) where T : BaseTexturable {
+        //public BaseTexturable AddTextureItem<T>(string textureName, float? positionX = null) where T : BaseTexturable {
+        //    //get an available renderable of the type T
+        //    var item = GetRenderable<T>().FirstOrDefault() as BaseTexturable;
+
+        //    //create a new instance if there was not one available
+        //    if (item == null || typeof(T) == typeof(Background)){
+        //        item = (T)Activator.CreateInstance(typeof(T), _content.Load<Texture2D>(textureName));
+
+        //        if (item.IsFullScreen) {
+        //            item.PositionX = positionX ?? _windowWidth;
+        //            item.PositionY = (float)_windowHeight;
+        //        }
+                
+        //        item.CheckOnScreen = IsOnScreen;
+        //        AddItem(item);
+        //    }else{
+        //        item.Init(_content.Load<Texture2D>(textureName), Vector2.Zero);
+        //    }
+
+        //    Debug.WriteLine($"Total Items: {_items.Count}");
+        //    return item;
+        //}
+
+        /// <summary>
+        /// Creates a new texture item that is interactable within the game world. Calls the BaseManager's GEt Renderable that recycles unused objects.
+        /// </summary>
+        /// <typeparam name="T">The object type to create</typeparam>
+        /// <param name="textureName">The texture graphic to be used for the interable object</param>
+        /// <returns></returns>
+        public BaseTexturable AddTextureItem<T>(List<ActiveAssetsVIEW> assetInfos, float? positionX = null) where T : BaseTexturable
+        {
             //get an available renderable of the type T
             var item = GetRenderable<T>().FirstOrDefault() as BaseTexturable;
 
             //create a new instance if there was not one available
-            if (item == null || typeof(T) == typeof(Background)){
-                item = (T)Activator.CreateInstance(typeof(T), _content.Load<Texture2D>(textureName));
+            if (item == null || typeof(T) == typeof(Background))
+            {
+                item = (T)Activator.CreateInstance(typeof(T), _content, assetInfos);
 
-                if (item.IsFullScreen) {
+                if (item.IsFullScreen)
+                {
                     item.PositionX = positionX ?? _windowWidth;
                     item.PositionY = (float)_windowHeight;
                 }
-                
+
                 item.CheckOnScreen = IsOnScreen;
                 AddItem(item);
-            }else{
-                item.Init(_content.Load<Texture2D>(textureName));
+            }
+            else
+            {
+                item.Init(assetInfos, Vector2.Zero);
             }
 
-            Debug.WriteLine($"Total Items: {_items.Count}");
+            //Debug.WriteLine($"Total Items: {_items.Count}");
             return item;
         }
 
@@ -114,7 +153,7 @@ namespace BattleMech.PCL.Managers.Game {
         {
             var keys = controller.GetInput();
             Player player = GetItemByEnum(TEXTURABLE_ITEM_TYPES.PLAYER) as Player;
-
+            var i = _items;
             foreach (var key in keys)
             {
                 switch (key)
@@ -132,7 +171,7 @@ namespace BattleMech.PCL.Managers.Game {
                         player.Accelerate(MOVEMENT_DIRECTION.DOWN);
                         break;
                     case Keys.Space:
-                        BaseTexturable bullet = AddTextureItem<GenericBullet>("GFX_WEAPON/viper_blaster.png");
+                        BaseTexturable bullet = AddTextureItem<GenericBullet>(stage.GetAssetInfo(10));
                         bullet.PositionX = player.PositionX + (player.Texture.Width / 2.0f);
                         bullet.PositionY = player.PositionY + (player.Texture.Height / 2.0f);
 
@@ -148,14 +187,14 @@ namespace BattleMech.PCL.Managers.Game {
             {
                 //create and position new enemy
                 var rand = new Random();
-                var enemy = AddTextureItem<Enemy>("GFX_ENEMY/Gimp.png");
+                var enemy = AddTextureItem<Enemy>(stage.GetAssetInfo(4));
                 enemy.PositionX = _windowWidth;
                 enemy.PositionY = (((float)rand.NextDouble() * (_windowHeight - enemy.Texture.Height * 2) + enemy.Texture.Height));
 
                 waveTime = 0;
                 nextWave = WAVE_INTERVAL;
 
-                Debug.WriteLine($"Created new enemy: id:{enemy.ID} | x: |{enemy.PositionX} | y:{enemy.PositionY}");
+                //Debug.WriteLine($"Created new enemy: id:{enemy.ID} | x: |{enemy.PositionX} | y:{enemy.PositionY}");
 
                 Metrics.TotalEnemiesFought++;
             }
@@ -177,6 +216,11 @@ namespace BattleMech.PCL.Managers.Game {
                     {
                         projectile.IsActive = false;
                         enemy.IsActive = false;
+
+                        var visEff =  (VisualEffect)AddTextureItem<VisualEffect>(stage.GetAssetInfo(25)); //TODO: Pass object type to client from bullet to determine asset needed
+                        visEff.PositionX = enemy.PositionX;
+                        visEff.PositionY = enemy.PositionY;
+                        visEff.Start();
 
                         Metrics.EnemiesDestroyed++;
                         Metrics.ExperienceGarnered += 100;

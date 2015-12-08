@@ -5,6 +5,8 @@ using Windows.UI.Xaml.Navigation;
 
 using BattleMech.PCL.ViewModels;
 using BattleMech.UWP.PSI;
+using BattleMech.PCL.Enums;
+using System;
 
 namespace BattleMech.UWP {
     public sealed partial class MainMenuPage : BasePage {
@@ -31,6 +33,39 @@ namespace BattleMech.UWP {
 
             if (App.Assets == null) {
                 App.Assets = await viewModel.LoadAssetData();
+
+                string strAssetType = ASSET_TYPES.GFX_WEAPON.ToString();
+
+                App.Assets.Add(new DataLayer.PCL.Views.Assets.ActiveAssetsVIEW() {
+                    ID = 10,
+                    AssetTypeID = Convert.ToInt32(ASSET_TYPES.GFX_WEAPON),
+                    Description = "viper_blaster",
+                    Filename = $"{strAssetType}/viper_blaster.png"
+                });
+
+                //strAssetType = ASSET_TYPES.GFX_ENEMY.ToString();
+                //App.Assets.Add(new DataLayer.PCL.Views.Assets.ActiveAssetsVIEW()
+                //{
+                //    ID = 15,
+                //    AssetTypeID = Convert.ToInt32(ASSET_TYPES.GFX_ENEMY),
+                //    Description = "enemy",
+                //    Filename = $"/Content/{strAssetType}/Gimp.png"
+                //});
+
+                //setup demo data
+                for (int i = 1; i <= 17; i++)
+                {
+
+                   strAssetType = ASSET_TYPES.GFX_EFFECTS.ToString();
+                    App.Assets.Add(new DataLayer.PCL.Views.Assets.ActiveAssetsVIEW()
+                    {
+                        
+                        ID = 25,
+                        AssetTypeID = Convert.ToInt32(ASSET_TYPES.GFX_EFFECTS),
+                        Description = "green explosion",
+                        Filename = $"{strAssetType}/GreenExplosion/green_explosion_{i}.png"
+                    });
+                }
             }
 
             App.PlayerAsset = App.Assets.FirstOrDefault(a => a.ID == result.PlayerAssetID);

@@ -93,10 +93,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Assets\background.jpg" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_1.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_10.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_11.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_12.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_13.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_14.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_15.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_16.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_17.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_2.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_3.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_4.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_5.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_6.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_7.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_8.png" />
+    <Content Include="Content\GFX_EFFECTS\GreenExplosion\green_explosion_9.png" />
+    <Content Include="Content\GFX_EFFECTS\green_explosion.png" />
     <Content Include="Fonts\Font.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Content\GFX_FONTS\MainFont.spriteFont" />
+    <Content Include="Content\GFX_EFFECTS\green_explosion.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -241,9 +262,7 @@
       <Name>BattleMech.WebAPI.PCL</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Content\GFX_EFFECTS\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

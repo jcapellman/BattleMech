@@ -1,7 +1,10 @@
-﻿using BattleMech.PCL.Enums;
+﻿using BattleMech.DataLayer.PCL.Views.Assets;
+using BattleMech.PCL.Enums;
 using BattleMech.PCL.Objects.Game.Base;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace BattleMech.PCL.Objects.Game {
@@ -21,7 +24,7 @@ namespace BattleMech.PCL.Objects.Game {
 
         public float Acceleration = 2.0f;
 
-        public Player(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.PLAYER) {
+        public Player(ContentManager content, List<ActiveAssetsVIEW> assetInfos) : base(content, assetInfos, TEXTURABLE_ITEM_TYPES.PLAYER) {
             PositionX = 200.0f;
             PositionY = 200.0f;
 

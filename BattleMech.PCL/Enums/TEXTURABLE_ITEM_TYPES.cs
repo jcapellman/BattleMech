@@ -4,6 +4,7 @@
         PLAYER,
         ENEMY,
         PROJECTILE,
+        EFFECT,
         TEXT
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using Windows.UI.Xaml.Controls;
 using BattleMech.DataLayer.PCL.Models.GameMetrics;
 using BattleMech.PCL.Enums;
+using BattleMech.PCL.Interfaces;
 using BattleMech.PCL.Managers.Game;
 using BattleMech.PCL.Objects.Game;
 using BattleMech.WebAPI.PCL.Handlers;
@@ -10,9 +11,15 @@ using BattleMech.WebAPI.PCL.Transports.Internal;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
+using Windows.Storage;
+using System;
+using Windows.Storage.Streams;
+using BattleMech.DataLayer.PCL.Views.Assets;
+using System.Collections.Generic;
 
 namespace BattleMech.UWP {
-    public class MainGame : Game {
+    public class MainGame : Game, IClientStage {
         GraphicsDeviceManager _graphics;
         SpriteBatch _spriteBatch;
 
@@ -27,29 +34,50 @@ namespace BattleMech.UWP {
 
         private void AddHUD()
         {
-            _tm.AddTextItem<Text>("GFX_FONTS/MainFont", "ENEMIES DESTROYED: 0", Color.White, new Vector2(20, 20));
-            _tm.AddTextItem<Text>("GFX_FONTS/MainFont", "SCORE: 0", Color.White, new Vector2(500, 20));
+            string font = "GFX_FONTS/MainFont";
+            _tm.AddTextItem<Text>(font, "ENEMIES DESTROYED: 0", Color.White, new Vector2(20, 20));
+            _tm.AddTextItem<Text>(font, "SCORE: 0", Color.White, new Vector2(500, 20));
 
         }
 
         protected override void LoadContent() {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _tm = new TexturableManager(Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
+            _tm = new TexturableManager(this, Content, Window.ClientBounds.Width, Window.ClientBounds.Height);
             _tm.controller = new PCInputController();
 
             AddHUD();
 
             foreach (var levelObjects in App.CurrentLevel.Objects) {
-                switch (levelObjects.AssetType) {
+                switch ((ASSET_TYPES)levelObjects.AssetInfos.FirstOrDefault().AssetTypeID) {
                     case ASSET_TYPES.GFX_BACKGROUND:
-                        _tm.AddTextureItem<Background>(levelObjects.Filename, levelObjects.PositionX);
+                        _tm.AddTextureItem<Background>(levelObjects.AssetInfos, levelObjects.PositionX);
                         break;
                 }
             }
 
-            //add the player's selected character to the game
-            _tm.AddTextureItem<Player>(App.PlayerAsset.Filename);
+            //string fileContent;
+            //StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Content/GFX_EFFECTS/green_explosion.json"));
+
+            //var uri = new Uri("ms-appx:///Content/GFX_EFFECTS/green_explosion.json");
+            //var btyes = File.ReadAllBytes(uri.ToString());
+
+            //using (StreamReader reader = new StreamReader(await file.OpenStreamForReadAsync()))
+            //{
+            //    fileContent = await reader.ReadToEndAsync();
+            //}
+
+
+                //IRandomAccessStream fileStream = await file.OpenAsync(FileAccessMode.Read);
+                //DataReader reader = new DataReader(fileStream);
+
+                //var bytes = new byte[fileStream.Size];
+                ////reader.ReadBytes(bytes);
+                //var blah = reader.ReadString((uint)fileStream.Size-1);
+
+                //AtlasHandler.Instance.CacheAtlas(bytes, bytes);
+                //add the player's selected character to the game
+                _tm.AddTextureItem<Player>(new List<ActiveAssetsVIEW>() { App.PlayerAsset } );
         }
         
         private async void recordGameMetric() {
@@ -93,6 +121,16 @@ namespace BattleMech.UWP {
 
             Windows.UI.Xaml.Window.Current.Content = frame;
             Windows.UI.Xaml.Window.Current.Activate();
+        }
+
+        /// <summary>
+        /// Gets all asset views associated with the ID provided. This can return a single image or a sequence of images.
+        /// </summary>
+        /// <param name="assestID"></param>
+        /// <returns></returns>
+        public List<ActiveAssetsVIEW> GetAssetInfo(int assestID)
+        {
+            return App.Assets.Where(a => a.ID == assestID).ToList();
         }
 
         protected override void Draw(GameTime gameTime) {

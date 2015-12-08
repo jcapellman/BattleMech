@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using BattleMech.DataLayer.PCL.Views.Assets;
+using Microsoft.Xna.Framework.Content;
 
 namespace BattleMech.PCL.Objects.Game.Actors
 {
     public class GenericBullet : BaseTexturable
     {
-        public GenericBullet(Texture2D texture) : base(texture, TEXTURABLE_ITEM_TYPES.PROJECTILE)
+        public GenericBullet(ContentManager content, List<ActiveAssetsVIEW> assetInfos) : base(content, assetInfos, TEXTURABLE_ITEM_TYPES.PROJECTILE)
         {
             MoveX = 10.0f;
             PositionX = 400.0f;

@@ -62,12 +62,19 @@ namespace BattleMech.PCL.ViewModels {
             foreach (var item in levelObjects) {
                 var asset = assets.FirstOrDefault(a => a.ID == item.AssetID);
 
+                //setup level object's asset info
+                var lvlObjAssetInfo = new ActiveAssetsVIEW()
+                {
+                    AssetTypeID = asset.AssetTypeID,
+                    ID = asset.ID,
+                    Description = "LevelObject",
+                    Filename = asset.Filename.Replace("/Content/", "")
+                };
+
                 var nItem = new LevelObject {
-                    AssetType = (ASSET_TYPES) asset.AssetTypeID,
-                    Filename = asset.Filename.Replace("/Content/", ""),
+                    AssetInfos = new List<ActiveAssetsVIEW>() { lvlObjAssetInfo },
                     PositionX = item.PositionX,
-                    PositionY = item.PositionY,
-                    AssetID = asset.ID
+                    PositionY = item.PositionY
                 };
                 
                 level.Objects.Add(nItem);

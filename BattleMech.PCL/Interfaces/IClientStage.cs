@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿using BattleMech.DataLayer.PCL.Views.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace BattleMech.PCL.Interfaces
 {
-    public interface ICollidable
+    public interface IClientStage
     {
-        bool IsColliding { get; set; }
-
-        bool GetCollision(Rectangle other);
+        List<ActiveAssetsVIEW> GetAssetInfo(int assetId);
     }
 }

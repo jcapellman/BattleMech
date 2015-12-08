@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BattleMech.PCL.Objects.Game;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace BattleMech.PCL.ViewModels {
     public class LevelEditorModel : BaseViewModel {
@@ -51,7 +52,7 @@ namespace BattleMech.PCL.ViewModels {
         public ActiveAssetsVIEW SelectedAsset {  get { return _selectedAsset; } set { _selectedAsset = value; OnPropertyChanged(); } }
 
         public void AddItem() {
-            LevelItems.Add(new LevelObject { AssetID = SelectedAsset.ID, Filename = SelectedAsset.Filename, PositionX = LevelItems.Count() });
+            LevelItems.Add(new LevelObject { AssetID = SelectedAsset.ID, AssetInfos =  new List<ActiveAssetsVIEW>() { SelectedAsset }, PositionX = LevelItems.Count() });
         }
 
         public async Task<bool> LoadData() {

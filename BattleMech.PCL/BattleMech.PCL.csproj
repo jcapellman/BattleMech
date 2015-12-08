@@ -48,7 +48,10 @@
     <Compile Include="Enums\ASSET_TYPES.cs" />
     <Compile Include="Enums\SETTING_OPTIONS.cs" />
     <Compile Include="Enums\TEXTURABLE_ITEM_TYPES.cs" />
+    <Compile Include="Interfaces\IAnimable.cs" />
+    <Compile Include="Interfaces\IClientStage.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
+    <Compile Include="Managers\Game\AtlasHandler.cs" />
     <Compile Include="Managers\Game\BaseGameManager.cs" />
     <Compile Include="Managers\Game\BaseInputController.cs" />
     <Compile Include="Managers\Game\PCInputController.cs" />
@@ -63,6 +66,7 @@
     <Compile Include="Objects\Game\LevelObjectLite.cs" />
     <Compile Include="Objects\Game\Player.cs" />
     <Compile Include="Objects\Game\Text.cs" />
+    <Compile Include="Objects\Game\VisualEffect.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSI\BaseLFSPSI.cs" />
     <Compile Include="PSI\BaseSettingsPSI.cs" />

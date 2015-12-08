@@ -1,12 +1,19 @@
-﻿using BattleMech.PCL.Enums;
+﻿using BattleMech.DataLayer.PCL.Views.Assets;
+using BattleMech.PCL.Enums;
 using BattleMech.PCL.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BattleMech.PCL.Objects.Game.Base {
     public class BaseTexturable : BaseRenderable, ICollidable
     {
+        protected ContentManager _content;
+        protected List<ActiveAssetsVIEW> _assetInfos;
+
         public Texture2D Texture;
 
         public TEXTURABLE_ITEM_TYPES ItemType;
@@ -17,23 +24,29 @@ namespace BattleMech.PCL.Objects.Game.Base {
 
         public Func<Rectangle, bool> CheckOnScreen;
 
-        public BaseTexturable(Texture2D texture, TEXTURABLE_ITEM_TYPES itemType) {
-            Texture = texture;
+        public BaseTexturable() { }
+
+        public BaseTexturable(ContentManager content, List<ActiveAssetsVIEW> assetInfos, TEXTURABLE_ITEM_TYPES itemType) : base() {
+            this._content = content;
+            this._assetInfos = assetInfos;
+            Texture = content.Load<Texture2D>(assetInfos.FirstOrDefault().Filename);
 
             ItemType = itemType;
         }
 
-        public void Init(Texture2D texture)
+        public void Init(List<ActiveAssetsVIEW> assetInfos, Vector2 position)
         {
-            this.Texture = texture;
-
+            _assetInfos = assetInfos;
+            Texture = _content.Load<Texture2D>(assetInfos.FirstOrDefault().Filename);
+            PositionX = position.X;
+            PositionY = position.Y;
             IsActive = true;
         }
 
         public override Rectangle GetRectange() {
-            if (IsFullScreen) {
-                return new Rectangle(0, 0, (int) PositionX, (int) PositionY);
-            }
+            //if (IsFullScreen) {
+            //    return new Rectangle(0, 0, (int) PositionX, (int) PositionY);
+            //}
 
             return new Rectangle((int) PositionX, (int) PositionY, Texture.Width, Texture.Height);
         }

@@ -12,12 +12,12 @@ namespace BattleMech.PCL.Objects.Game {
         public Color FontColor;
         public Vector2 Position;
 
-        public void Init(SpriteFont font, double fontSize, string text, Color fontColor, Vector2 posiition) {
+        public void Init(SpriteFont font, double fontSize, string text, Color fontColor, Vector2 position) {
             sfMain = font;
             FontSize = fontSize;
             RenderText = text;
             FontColor = fontColor;
-            Position = posiition;
+            Position = position;
         }
 
         public void UpdateText(string renderText) {
@@ -28,8 +28,9 @@ namespace BattleMech.PCL.Objects.Game {
             return new Rectangle();
         }
 
-        public Text(Texture2D texture, TEXTURABLE_ITEM_TYPES itemType) : base(texture, itemType) {
+        public Text(Texture2D texture, TEXTURABLE_ITEM_TYPES itemType) {
             IsActive = true;
+            this.ItemType = itemType;
         }
     }
 }

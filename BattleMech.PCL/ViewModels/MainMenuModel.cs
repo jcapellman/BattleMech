@@ -99,11 +99,12 @@ namespace BattleMech.PCL.ViewModels {
             _settingPSI.Write(SETTING_OPTIONS.ASSET_VERSION, result.Value.AssetVerion);
             
             var fileWrite = await _lfsPSI.WriteFile(result.Value);
-
+            
+            //iteration over the assets retrieved and change the filename to the location of the file
             for (var x = 0; x < result.Value.Assets.Count; x++) {
                 var item = result.Value.Assets[x];
-
-                result.Value.Assets[x].Filename = $"/Content/{((ASSET_TYPES)item.AssetTypeID).ToString()}/{item.Filename}";
+                
+                result.Value.Assets[x].Filename = $"{((ASSET_TYPES)item.AssetTypeID).ToString()}/{item.Filename}";
             }
 
             return result.Value.Assets;
