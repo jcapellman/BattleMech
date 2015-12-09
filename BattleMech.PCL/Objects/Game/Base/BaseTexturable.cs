@@ -44,9 +44,9 @@ namespace BattleMech.PCL.Objects.Game.Base {
         }
 
         public override Rectangle GetRectange() {
-            //if (IsFullScreen) {
-            //    return new Rectangle(0, 0, (int) PositionX, (int) PositionY);
-            //}
+            if (IsFullScreen) {
+                return new Rectangle((int)PositionX, (int)PositionY, (int)Width, (int)Height);
+            }
 
             return new Rectangle((int) PositionX, (int) PositionY, Texture.Width, Texture.Height);
         }

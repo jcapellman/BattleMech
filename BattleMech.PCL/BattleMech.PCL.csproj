@@ -51,7 +51,6 @@
     <Compile Include="Interfaces\IAnimable.cs" />
     <Compile Include="Interfaces\IClientStage.cs" />
     <Compile Include="Interfaces\ICollidable.cs" />
-    <Compile Include="Managers\Game\AtlasHandler.cs" />
     <Compile Include="Managers\Game\BaseGameManager.cs" />
     <Compile Include="Managers\Game\BaseInputController.cs" />
     <Compile Include="Managers\Game\PCInputController.cs" />

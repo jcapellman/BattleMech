@@ -108,7 +108,7 @@ namespace BattleMech.PCL.Managers.Game {
         /// <typeparam name="T">The object type to create</typeparam>
         /// <param name="textureName">The texture graphic to be used for the interable object</param>
         /// <returns></returns>
-        public BaseTexturable AddTextureItem<T>(List<ActiveAssetsVIEW> assetInfos, float? positionX = null) where T : BaseTexturable
+        public BaseTexturable AddTextureItem<T>(List<ActiveAssetsVIEW> assetInfos, float? positionX = null, float? positionY = null) where T : BaseTexturable
         {
             //get an available renderable of the type T
             var item = GetRenderable<T>().FirstOrDefault() as BaseTexturable;
@@ -120,8 +120,10 @@ namespace BattleMech.PCL.Managers.Game {
 
                 if (item.IsFullScreen)
                 {
-                    item.PositionX = positionX ?? _windowWidth;
-                    item.PositionY = (float)_windowHeight;
+                    item.Width = _windowWidth;
+                    item.Height = _windowHeight;
+                    item.PositionX = positionX ?? 0;
+                    item.PositionY = positionY ?? 0;
                 }
 
                 item.CheckOnScreen = IsOnScreen;
@@ -200,7 +202,6 @@ namespace BattleMech.PCL.Managers.Game {
             }
 
             //prepare for collision detection between active enemies and projectiles
-
             var enemies = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.ENEMY);
             var projectiles = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.PROJECTILE);
 
@@ -237,6 +238,15 @@ namespace BattleMech.PCL.Managers.Game {
                     tItem.UpdateText($"ENEMIES DESTROYED: {Metrics.EnemiesDestroyed}");
                 } else if (tItem.RenderText.StartsWith("SCORE")) {
                     tItem.UpdateText($"SCORE: {Metrics.EnemiesDestroyed * 100}");
+                }
+            }
+
+            //check to reposition the background
+            var backgrounds = GetItemsByEnum(TEXTURABLE_ITEM_TYPES.BACKGROUND);
+
+            foreach (var bkgd in backgrounds) {
+                if (bkgd.Position.X <= -_windowWidth) {
+                    bkgd.PositionX = _windowWidth + (bkgd.PositionX + _windowWidth);
                 }
             }
 

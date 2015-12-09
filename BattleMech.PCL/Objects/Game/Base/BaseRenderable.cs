@@ -15,6 +15,10 @@ namespace BattleMech.PCL.Objects.Game.Base {
 
         public float MoveY;
 
+        public float Width;
+
+        public float Height;
+
         public Guid ID;
 
         public bool BoundWithinScreen;

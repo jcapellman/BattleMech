@@ -32,7 +32,7 @@ namespace BattleMech.PCL.Objects.Game
             duration += gameTime.ElapsedGameTime.TotalMilliseconds;
 
             if (duration >= frameDuration) NextFrame();
-            Debug.WriteLine($"Duration: {duration} | FrameDuration: {frameDuration}");
+            
             base.Update(gameTime);
 
             //if (CheckOnScreen != null && !CheckOnScreen(GetRectange())) IsActive = false;
