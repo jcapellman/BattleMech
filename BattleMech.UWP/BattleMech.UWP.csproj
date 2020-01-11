@@ -11,8 +11,8 @@
     <AssemblyName>BattleMech.UWP</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <FileAlignment>512</FileAlignment>
@@ -21,6 +21,7 @@
     <MonoGamePlatform>WindowsStoreApp</MonoGamePlatform>
     <MonoGameContentBuilderExe>
     </MonoGameContentBuilderExe>
+    <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -118,7 +119,6 @@
     <Content Include="Content\GFX_EFFECTS\green_explosion.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -249,20 +249,30 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BattleMech.DataLayer.PCL\BattleMech.DataLayer.PCL.csproj">
-      <Project>{93ce6a5a-b4dc-4158-8c72-f80de9fd0396}</Project>
-      <Name>BattleMech.DataLayer.PCL</Name>
+    <ProjectReference Include="..\BattleMech.DataLayer.lib\BattleMech.DataLayer.lib.csproj">
+      <Project>{dc74879a-cbfa-4c69-8003-d03476d04172}</Project>
+      <Name>BattleMech.DataLayer.lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BattleMech.PCL\BattleMech.PCL.csproj">
-      <Project>{52928fb5-ff01-4e44-b330-3816a5e77c47}</Project>
-      <Name>BattleMech.PCL</Name>
+    <ProjectReference Include="..\BattleMech.lib\BattleMech.lib.csproj">
+      <Project>{f618d249-e66e-4f94-9dc5-f9abd9fb4011}</Project>
+      <Name>BattleMech.lib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BattleMech.WebAPI.PCL\BattleMech.WebAPI.PCL.csproj">
-      <Project>{270eedbb-64db-4372-9594-251337cc81d1}</Project>
-      <Name>BattleMech.WebAPI.PCL</Name>
+    <ProjectReference Include="..\BattleMech.WebAPI.lib\BattleMech.WebAPI.lib.csproj">
+      <Project>{cdbceb39-23d1-48ab-8c75-7bcf57bb552a}</Project>
+      <Name>BattleMech.WebAPI.lib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.WindowsUAP">
+      <Version>3.4.0.459</Version>
+    </PackageReference>
+    <PackageReference Include="MonoGame.Framework.WindowsUniversal">
+      <Version>3.7.1.189</Version>
+    </PackageReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
